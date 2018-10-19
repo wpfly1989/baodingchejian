@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
                             @Override
                             public void run() {
                                 qBadgeView.setVisibility(View.VISIBLE);
-                                qBadgeView.setBadgeText("新");
+                                qBadgeView.setBadgeText("新通知");
                                 zhuyetongzhi = responseData;
                             }
                         });
