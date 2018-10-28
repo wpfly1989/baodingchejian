@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/jingguanggao"
+        android:icon="@mipmap/ic_launcher"
+        android:title="京广高"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/jinbaoxian"
+        android:icon="@mipmap/ic_launcher"
+        android:title="津保线"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/jingguangxian"
+        android:icon="@mipmap/ic_launcher"
+        android:title="京广线"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/baomanxian"
+        android:icon="@mipmap/ic_launcher"
+        android:title="保满线"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/manshenxian"
+        android:icon="@mipmap/ic_launcher"
+        android:title="满神线"
+        app:showAsAction="never"/>
+
+</menu>

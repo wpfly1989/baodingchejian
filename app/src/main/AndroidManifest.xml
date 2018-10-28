@@ -3,7 +3,7 @@
     package="com.example.lenovo.baodingchejian">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
@@ -15,8 +15,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="保定车间">
-        </activity>
+            android:label="保定车间" />
         <activity android:name=".BanZuXinXi" />
         <activity android:name=".CommonWebViewActivity" />
         <activity android:name=".MaxImageView" />
@@ -24,7 +23,8 @@
         <activity android:name=".ShangJiWenJianActivity" />
         <activity android:name=".DingWeiListView" />
         <activity android:name=".DownloadActivity" />
-        <activity android:name=".LoginActivity"
+        <activity
+            android:name=".LoginActivity"
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,6 +32,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".TaiZhangWangTu" />
+        <activity android:name=".WenJianSouSuo"></activity>
     </application>
 
 </manifest>

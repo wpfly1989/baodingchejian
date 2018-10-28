@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
                 android:textSize="20dp"
-                android:text="朱红海（副主任）"/>
+                android:text="朱红海（副主任--普铁）"/>
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/zhuhonghairecyclerview"
                 android:layout_width="match_parent"
@@ -107,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
                 android:textSize="20dp"
-                android:text="杨秀玉（副主任）"/>
+                android:text="杨秀玉（副主任--高铁）"/>
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/yangxiuyurecyclerview"
                 android:layout_width="match_parent"

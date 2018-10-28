@@ -205,6 +205,9 @@ public class CheJianFragment extends Fragment{
                     Intent intent = new Intent(getActivity(), CommonWebViewActivity.class);
                     intent.putExtra("add","http://43.226.46.228/dianhuachuanzhen/dianhuachuanzhen.html");
                     startActivity(intent);
+                } else if (projectList.get(position).getImageId() == R.mipmap.jishulvli) {
+                    Intent intent = new Intent(getActivity(), TaiZhangWangTu.class);
+                    startActivity(intent);
                 }
             }
         });
@@ -644,17 +647,17 @@ public class CheJianFragment extends Fragment{
     private void intProject() {
         ProjectItemForCheJian cjjj = new ProjectItemForCheJian("车间简介",R.mipmap.chejianjieshao);
         projectList.add(cjjj);
-        ProjectItemForCheJian sjwj = new ProjectItemForCheJian("上级文件",R.mipmap.shangjiwenjian);
+        ProjectItemForCheJian sjwj = new ProjectItemForCheJian("文件系统",R.mipmap.shangjiwenjian);
         projectList.add(sjwj);
         ProjectItemForCheJian sgan = new ProjectItemForCheJian("施工安全",R.mipmap.shigonganquan);
         projectList.add(sgan);
-        ProjectItemForCheJian djyt = new ProjectItemForCheJian("党建与团",R.mipmap.dangjianyutuan);
+        ProjectItemForCheJian djyt = new ProjectItemForCheJian("党团建设",R.mipmap.dangjianyutuan);
         projectList.add(djyt);
         ProjectItemForCheJian jcbz = new ProjectItemForCheJian("检查标准",R.mipmap.jianchabiaozhun);
         projectList.add(jcbz);
         ProjectItemForCheJian bzhjs = new ProjectItemForCheJian("标准化建设",R.mipmap.biaozhunhuajianshe);
         projectList.add(bzhjs);
-        ProjectItemForCheJian qxyl = new ProjectItemForCheJian("抢险演练",R.mipmap.qiangxianyanlian);
+        ProjectItemForCheJian qxyl = new ProjectItemForCheJian("应急抢险",R.mipmap.qiangxianyanlian);
         projectList.add(qxyl);
         ProjectItemForCheJian glmb = new ProjectItemForCheJian("管理模板",R.mipmap.guanlimuban);
         projectList.add(glmb);
@@ -664,12 +667,14 @@ public class CheJianFragment extends Fragment{
         projectList.add(gzzd);
         ProjectItemForCheJian dhcz = new ProjectItemForCheJian("电话传真",R.mipmap.dianhuachuanzhen);
         projectList.add(dhcz);
+        ProjectItemForCheJian jsll = new ProjectItemForCheJian("台账网图",R.mipmap.jishulvli);
+        projectList.add(jsll);
         }
 
      private void initLiBaoJun() {
         ProjectItemForCheJian aaa = new ProjectItemForCheJian("岗位职责", R.mipmap.gangweizhize);
         projectListlbj.add(aaa);
-         ProjectItemForCheJian ccc = new ProjectItemForCheJian("技术履历", R.mipmap.jishulvli);
+         ProjectItemForCheJian ccc = new ProjectItemForCheJian("文件备忘", R.mipmap.wenjianbeiwang);
          projectListlbj.add(ccc);
          ProjectItemForCheJian bbb = new ProjectItemForCheJian("文件通告", R.mipmap.wenjiantonggao);
          projectListlbj.add(bbb);
@@ -679,7 +684,7 @@ public class CheJianFragment extends Fragment{
          ProjectItemForCheJian aaa = new ProjectItemForCheJian("岗位职责", R.mipmap.gangweizhize);
          projectListzyc.add(aaa);
 
-         ProjectItemForCheJian ccc = new ProjectItemForCheJian("技术履历", R.mipmap.jishulvli);
+         ProjectItemForCheJian ccc = new ProjectItemForCheJian("文件备忘", R.mipmap.wenjianbeiwang);
          projectListzyc.add(ccc);
          ProjectItemForCheJian bbb = new ProjectItemForCheJian("文件通告", R.mipmap.wenjiantonggao);
          projectListzyc.add(bbb);
@@ -689,7 +694,7 @@ public class CheJianFragment extends Fragment{
         ProjectItemForCheJian aaa = new ProjectItemForCheJian("岗位职责", R.mipmap.gangweizhize);
         projectListzhh.add(aaa);
 
-        ProjectItemForCheJian ccc = new ProjectItemForCheJian("技术履历", R.mipmap.jishulvli);
+        ProjectItemForCheJian ccc = new ProjectItemForCheJian("文件备忘", R.mipmap.wenjianbeiwang);
         projectListzhh.add(ccc);
         ProjectItemForCheJian bbb = new ProjectItemForCheJian("文件通告", R.mipmap.wenjiantonggao);
         projectListzhh.add(bbb);
@@ -699,7 +704,7 @@ public class CheJianFragment extends Fragment{
         ProjectItemForCheJian aaa = new ProjectItemForCheJian("岗位职责", R.mipmap.gangweizhize);
         projectListyxy.add(aaa);
 
-        ProjectItemForCheJian ccc = new ProjectItemForCheJian("技术履历", R.mipmap.jishulvli);
+        ProjectItemForCheJian ccc = new ProjectItemForCheJian("文件备忘", R.mipmap.wenjianbeiwang);
         projectListyxy.add(ccc);
         ProjectItemForCheJian bbb = new ProjectItemForCheJian("文件通告", R.mipmap.wenjiantonggao);
         projectListyxy.add(bbb);
@@ -708,7 +713,7 @@ public class CheJianFragment extends Fragment{
     private void initForCheJianDiaoDu() {
         ProjectItemForCheJian diaodu1 = new ProjectItemForCheJian("岗位职责", R.mipmap.gangweizhize);
         projectList1.add(diaodu1);
-        ProjectItemForCheJian diaodu3 = new ProjectItemForCheJian("技术履历", R.mipmap.jishulvli);
+        ProjectItemForCheJian diaodu3 = new ProjectItemForCheJian("文件备忘", R.mipmap.wenjianbeiwang);
         projectList1.add(diaodu3);
         ProjectItemForCheJian diaodu2 = new ProjectItemForCheJian("重要通知", R.mipmap.zhongyaotongzhi);
         projectList1.add(diaodu2);
@@ -718,7 +723,7 @@ public class CheJianFragment extends Fragment{
         ProjectItemForCheJian mahongyan1 = new ProjectItemForCheJian("岗位职责", R.mipmap.gangweizhize);
         projectListm.add(mahongyan1);
 
-        ProjectItemForCheJian mahongyan3 = new ProjectItemForCheJian("技术履历", R.mipmap.jishulvli);
+        ProjectItemForCheJian mahongyan3 = new ProjectItemForCheJian("文件备忘", R.mipmap.wenjianbeiwang);
         projectListm.add(mahongyan3);
         ProjectItemForCheJian mahongyan2 = new ProjectItemForCheJian("文件通告", R.mipmap.wenjiantonggao);
         projectListm.add(mahongyan2);
@@ -733,14 +738,14 @@ public class CheJianFragment extends Fragment{
         projectLists.add(sunyajun2);
         ProjectItemForCheJian sunyajun4 = new ProjectItemForCheJian("考试相关", R.mipmap.xiangguankaoshi);
         projectLists.add(sunyajun4);
-        ProjectItemForCheJian sunyajun5 = new ProjectItemForCheJian("技术履历", R.mipmap.jishulvli);
+        ProjectItemForCheJian sunyajun5 = new ProjectItemForCheJian("文件备忘", R.mipmap.wenjianbeiwang);
         projectLists.add(sunyajun5);
     }
     private void initGaoLiMin() {
         ProjectItemForCheJian mahongyan1 = new ProjectItemForCheJian("岗位职责", R.mipmap.gangweizhize);
         projectListg.add(mahongyan1);
 
-        ProjectItemForCheJian mahongyan3 = new ProjectItemForCheJian("技术履历", R.mipmap.jishulvli);
+        ProjectItemForCheJian mahongyan3 = new ProjectItemForCheJian("文件备忘", R.mipmap.wenjianbeiwang);
         projectListg.add(mahongyan3);
         ProjectItemForCheJian mahongyan2 = new ProjectItemForCheJian("文件通告", R.mipmap.wenjiantonggao);
         projectListg.add(mahongyan2);
@@ -749,7 +754,7 @@ public class CheJianFragment extends Fragment{
         ProjectItemForCheJian mahongyan1 = new ProjectItemForCheJian("岗位职责", R.mipmap.gangweizhize);
         projectListh.add(mahongyan1);
 
-        ProjectItemForCheJian mahongyan3 = new ProjectItemForCheJian("技术履历", R.mipmap.jishulvli);
+        ProjectItemForCheJian mahongyan3 = new ProjectItemForCheJian("文件备忘", R.mipmap.wenjianbeiwang);
         projectListh.add(mahongyan3);
         ProjectItemForCheJian mahongyan2 = new ProjectItemForCheJian("文件通告", R.mipmap.wenjiantonggao);
         projectListh.add(mahongyan2);
@@ -758,7 +763,7 @@ public class CheJianFragment extends Fragment{
         ProjectItemForCheJian mahongyan1 = new ProjectItemForCheJian("岗位职责", R.mipmap.gangweizhize);
         projectListwj.add(mahongyan1);
 
-        ProjectItemForCheJian mahongyan3 = new ProjectItemForCheJian("技术履历", R.mipmap.jishulvli);
+        ProjectItemForCheJian mahongyan3 = new ProjectItemForCheJian("文件备忘", R.mipmap.wenjianbeiwang);
         projectListwj.add(mahongyan3);
         ProjectItemForCheJian mahongyan2 = new ProjectItemForCheJian("文件通告", R.mipmap.wenjiantonggao);
         projectListwj.add(mahongyan2);
@@ -767,7 +772,7 @@ public class CheJianFragment extends Fragment{
         ProjectItemForCheJian mahongyan1 = new ProjectItemForCheJian("岗位职责", R.mipmap.gangweizhize);
         projectListwhr.add(mahongyan1);
 
-        ProjectItemForCheJian mahongyan3 = new ProjectItemForCheJian("技术履历", R.mipmap.jishulvli);
+        ProjectItemForCheJian mahongyan3 = new ProjectItemForCheJian("文件备忘", R.mipmap.wenjianbeiwang);
         projectListwhr.add(mahongyan3);
         ProjectItemForCheJian mahongyan2 = new ProjectItemForCheJian("文件通告", R.mipmap.wenjiantonggao);
         projectListwhr.add(mahongyan2);
