@@ -3,7 +3,14 @@ package com.example.lenovo.baodingchejian;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
+
 import com.bm.library.PhotoView;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 public class MaxImageView extends AppCompatActivity {
@@ -18,7 +25,8 @@ public class MaxImageView extends AppCompatActivity {
         String url = intent.getStringExtra("add");
 
         photoView = (PhotoView)findViewById(R.id.maxImageView);
-        Picasso.with(this).load(url).placeholder(R.mipmap.tupianjiazaizhong).into(photoView);
+        Glide.with(this).load(url).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).into(photoView);
+
 
         photoView.enable();
         photoView.setMaxScale(5.0f);

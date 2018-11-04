@@ -33,7 +33,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".TaiZhangWangTu" />
-        <activity android:name=".WenJianSouSuo"></activity>
+        <activity android:name=".WenJianSouSuo" />
+        <activity android:name=".SubsamplingImageActivity" />
+        <activity android:name=".WangTuHuanTuListView"></activity>
     </application>
 
 </manifest>

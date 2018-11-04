@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 import com.stx.xhb.xbanner.XBanner;
 
@@ -124,7 +125,7 @@ public class CheJianFragment extends Fragment{
             @SuppressLint("NewApi")
             @Override
             public void loadBanner(XBanner banner, Object model, View view, int position) {
-                Picasso.with(Objects.requireNonNull(getActivity())).load(image.get(position)).into((ImageView) view);
+                Glide.with(Objects.requireNonNull(getActivity())).load(image.get(position)).into((ImageView) view);
             }
         });
         xBanner.setOnItemClickListener(new XBanner.OnItemClickListener() {
