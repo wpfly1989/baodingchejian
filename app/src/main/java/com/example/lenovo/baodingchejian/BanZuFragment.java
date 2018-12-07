@@ -42,42 +42,52 @@ public class BanZuFragment extends Fragment{
                 if (banZuTuBiao.getTuBiaoDa().contains("保定东高铁")) {
                     Intent intent = new Intent(getActivity(),BanZuXinXi.class);
                     intent.putExtra("name", banZuTuBiao.getTuBiaoDa());
+                    intent.putExtra("wenjianbeiwangname","baodingdonggaotiewenjianbeiwang");
                     startActivity(intent);
                 } else if (banZuTuBiao.getTuBiaoDa().contains("高碑店")) {
                     Intent intent = new Intent(getActivity(),BanZuXinXi.class);
                     intent.putExtra("name", banZuTuBiao.getTuBiaoDa());
+                    intent.putExtra("wenjianbeiwangname","gaobeidianwenjianbeiwang");
                     startActivity(intent);
                 } else if (banZuTuBiao.getTuBiaoDa().contains("固城")) {
                     Intent intent = new Intent(getActivity(),BanZuXinXi.class);
                     intent.putExtra("name", banZuTuBiao.getTuBiaoDa());
+                    intent.putExtra("wenjianbeiwangname","guchengwenjianbeiwang");
                     startActivity(intent);
                 } else if (banZuTuBiao.getTuBiaoDa().contains("保定通信")) {
                     Intent intent = new Intent(getActivity(),BanZuXinXi.class);
                     intent.putExtra("name", banZuTuBiao.getTuBiaoDa());
+                    intent.putExtra("wenjianbeiwangname","baodingwenjianbeiwang");
                     startActivity(intent);
                 } else if (banZuTuBiao.getTuBiaoDa().contains("保定南")) {
                     Intent intent = new Intent(getActivity(),BanZuXinXi.class);
                     intent.putExtra("name", banZuTuBiao.getTuBiaoDa());
+                    intent.putExtra("wenjianbeiwangname","baodingnanwenjianbeiwang");
                     startActivity(intent);
                 } else if (banZuTuBiao.getTuBiaoDa().contains("望都")) {
                     Intent intent = new Intent(getActivity(),BanZuXinXi.class);
                     intent.putExtra("name", banZuTuBiao.getTuBiaoDa());
+                    intent.putExtra("wenjianbeiwangname","wangduwenjianbeiwang");
                     startActivity(intent);
                 } else if (banZuTuBiao.getTuBiaoDa().contains("定州通信")) {
                     Intent intent = new Intent(getActivity(),BanZuXinXi.class);
                     intent.putExtra("name", banZuTuBiao.getTuBiaoDa());
+                    intent.putExtra("wenjianbeiwangname","dingzhouwenjianbeiwang");
                     startActivity(intent);
                 } else if (banZuTuBiao.getTuBiaoDa().contains("新乐")) {
                     Intent intent = new Intent(getActivity(),BanZuXinXi.class);
                     intent.putExtra("name", banZuTuBiao.getTuBiaoDa());
+                    intent.putExtra("wenjianbeiwangname","xinlewenjianbeiwang");
                     startActivity(intent);
                 } else if (banZuTuBiao.getTuBiaoDa().contains("白沟")) {
                     Intent intent = new Intent(getActivity(),BanZuXinXi.class);
                     intent.putExtra("name", banZuTuBiao.getTuBiaoDa());
+                    intent.putExtra("wenjianbeiwangname","baigouwenjianbeiwang");
                     startActivity(intent);
                 } else if (banZuTuBiao.getTuBiaoDa().contains("定州东")) {
                     Intent intent = new Intent(getActivity(),BanZuXinXi.class);
                     intent.putExtra("name", banZuTuBiao.getTuBiaoDa());
+                    intent.putExtra("wenjianbeiwangname","dingzhoudonggaotiewenjianbeiwang");
                     startActivity(intent);
                 }
             }
@@ -96,18 +106,22 @@ public class BanZuFragment extends Fragment{
                 if (banZuTuBiao1.getTuBiaoDa().contains("无线")) {
                     Intent intent = new Intent(getActivity(),BanZuXinXi.class);
                     intent.putExtra("name", banZuTuBiao1.getTuBiaoDa());
+                    intent.putExtra("wenjianbeiwangname","wuxianwenjianbeiwang");
                     startActivity(intent);
                 } else if (banZuTuBiao1.getTuBiaoDa().contains("光电")) {
                     Intent intent = new Intent(getActivity(),BanZuXinXi.class);
                     intent.putExtra("name", banZuTuBiao1.getTuBiaoDa());
+                    intent.putExtra("wenjianbeiwangname","guangdianwenjianbeiwang");
                     startActivity(intent);
                 } else if (banZuTuBiao1.getTuBiaoDa().contains("网监")) {
                     Intent intent = new Intent(getActivity(),BanZuXinXi.class);
                     intent.putExtra("name", banZuTuBiao1.getTuBiaoDa());
+                    intent.putExtra("wenjianbeiwangname","wangjianwenjianbeiwang");
                     startActivity(intent);
                 } else if (banZuTuBiao1.getTuBiaoDa().contains("电报")) {
                     Intent intent = new Intent(getActivity(),BanZuXinXi.class);
                     intent.putExtra("name", banZuTuBiao1.getTuBiaoDa());
+                    intent.putExtra("wenjianbeiwangname","dianbaosuowenjianbeiwang");
                     startActivity(intent);
                 }
             }

@@ -4,9 +4,9 @@
 
     <item
         android:id="@+id/fenxiangciruanjian"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/newshare2"
         android:title="分享此软件"
-        app:showAsAction="never"
+        app:showAsAction="always"
         />
 
 </menu>

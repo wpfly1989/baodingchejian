@@ -84,10 +84,15 @@ public class WangTuHuanTuListView extends AppCompatActivity {
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent intent = new Intent(WangTuHuanTuListView.this,SubsamplingImageActivity.class);
-                        intent.putExtra("addforimage", add.get(position));
-                        startActivity(intent);
-
+                        if (commonListViewItemList.get(position).getName().contains("网页")) {
+                            Intent intent = new Intent(WangTuHuanTuListView.this,CommonWebViewActivity.class);
+                            intent.putExtra("add",add.get(position));
+                            startActivity(intent);
+                        } else {
+                            Intent intent = new Intent(WangTuHuanTuListView.this, SubsamplingImageActivity.class);
+                            intent.putExtra("addforimage", add.get(position));
+                            startActivity(intent);
+                        }
                     }
                 });
 

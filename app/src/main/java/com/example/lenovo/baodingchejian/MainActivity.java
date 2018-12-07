@@ -25,6 +25,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.xiao.nicevideoplayer.NiceVideoPlayerManager;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
@@ -353,15 +355,23 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (NiceVideoPlayerManager.instance().onBackPressd()) return true;
             if (System.currentTimeMillis() - exitTime > 2000) {
+
                 Toast.makeText(MainActivity.this, "再按一次退出程序",Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
             } else {
-                //finish();
                 System.exit(0);
             }
+
             return false;
         }
         return super.onKeyDown(keyCode, event);
     }
+
+   /* @Override
+    public void onBackPressed() {
+        if (NiceVideoPlayerManager.instance().onBackPressd()) return;
+        super.onBackPressed();
+    }*/
 }

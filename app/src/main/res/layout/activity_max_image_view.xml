@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
     <com.bm.library.PhotoView
         android:id="@+id/maxImageView"
         android:layout_width="match_parent"

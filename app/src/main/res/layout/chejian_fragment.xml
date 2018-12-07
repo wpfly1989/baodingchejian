@@ -35,208 +35,49 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/baodingchejianrecyclerview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+            android:layout_height="match_parent"/>
+        <ImageView
+            android:id="@+id/dongtaitaizhangimageview"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="5dp"
+            android:src="@mipmap/dongtaitaizhang"
+            android:scaleType="fitXY"/>
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="#FAEBD7"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:text="李保军（主任）"/>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/libaojunrecyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                ></android.support.v7.widget.RecyclerView>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="#FAEBD7"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:text="张艳春（书记）"/>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/zhangyanchunrecyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                ></android.support.v7.widget.RecyclerView>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="#FAEBD7"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:text="朱红海（副主任--普铁）"/>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/zhuhonghairecyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                ></android.support.v7.widget.RecyclerView>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="#FAEBD7"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:text="杨秀玉（副主任--高铁）"/>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/yangxiuyurecyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                ></android.support.v7.widget.RecyclerView>
-        </LinearLayout>
-
-     <LinearLayout
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:layout_marginTop="5dp"
-         android:background="#FAEBD7"
-         android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#000000"
-            android:textSize="20dp"
-            android:text="车间调度"/>
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/chejiandiaodurecyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            ></android.support.v7.widget.RecyclerView>
-     </LinearLayout>
-        <LinearLayout
+            android:textSize="15dp"
+            android:layout_marginTop="5dp"
+            android:text="车间企业文化"/>
+
+           <com.xiao.nicevideoplayer.NiceVideoPlayer
+               android:id="@+id/nicevideoplayer"
+               android:layout_width="match_parent"
+               android:layout_height="200dp"/>
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="15dp"
             android:layout_marginTop="5dp"
-            android:background="#FAEBD7"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:text="马红岩（办事员）"/>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/mahongyanrecyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                ></android.support.v7.widget.RecyclerView>
-        </LinearLayout>
-        <LinearLayout
+            android:text="车间所获奖励"/>
+
+        <com.stx.xhb.xbanner.XBanner
+            android:id="@+id/xbanner1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="#FAEBD7"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:text="孙亚军（业务指导--职教）"/>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/sunyajunrecyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                ></android.support.v7.widget.RecyclerView>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="#FAEBD7"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:text="高利民（业务指导--普铁线路）"/>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/gaoliminrecyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                ></android.support.v7.widget.RecyclerView>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="#FAEBD7"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:text="胡旭瑞（业务指导--安全）"/>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/huxvruirecyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                ></android.support.v7.widget.RecyclerView>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="#FAEBD7"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:text="王建（业务指导--高铁设备）"/>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/wangjianrecyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                ></android.support.v7.widget.RecyclerView>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="#FAEBD7"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:textSize="20dp"
-                android:text="王会然（业务指导--普铁设备）"/>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/wanghuiranrecyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                ></android.support.v7.widget.RecyclerView>
-        </LinearLayout>
+            android:layout_height="150dp"
+            app:AutoPlayTime="3000"
+            app:pointsContainerBackground="#44AAAAAA"
+            app:pointsPosition="CENTER"
+            app:tipTextColor="#000000"
+            app:tipTextSize="13dp">
+
+        </com.stx.xhb.xbanner.XBanner>
+
+
     </LinearLayout>
 
 </ScrollView>

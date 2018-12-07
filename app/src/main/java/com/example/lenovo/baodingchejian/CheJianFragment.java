@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,11 +17,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.squareup.picasso.Picasso;
 import com.stx.xhb.xbanner.XBanner;
+import com.xiao.nicevideoplayer.NiceVideoPlayer;
+import com.xiao.nicevideoplayer.NiceVideoPlayerManager;
+import com.xiao.nicevideoplayer.TxVideoPlayerController;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -44,43 +51,14 @@ public class CheJianFragment extends Fragment{
     private Calendar calendarbeFore;
     private Calendar calendarNow;
     private XBanner xBanner;
+    private XBanner xBanner1;
     private ArrayList<Integer> image;
+    private ArrayList<Integer> image1;
     private ArrayList<String> tittle;
+    private ArrayList<String> tittle1;
     private ArrayList<ProjectItemForCheJian> projectList = new ArrayList<>();
-    private ArrayList<ProjectItemForCheJian> projectList1 = new ArrayList<>();
-    private ArrayList<ProjectItemForCheJian> projectListm = new ArrayList<>();
-    private ArrayList<ProjectItemForCheJian> projectLists = new ArrayList<>();
-    private ArrayList<ProjectItemForCheJian> projectListg = new ArrayList<>();
-    private ArrayList<ProjectItemForCheJian> projectListh = new ArrayList<>();
-    private ArrayList<ProjectItemForCheJian> projectListwj = new ArrayList<>();
-    private ArrayList<ProjectItemForCheJian> projectListwhr = new ArrayList<>();
-    private ArrayList<ProjectItemForCheJian> projectListlbj = new ArrayList<>();
-    private ArrayList<ProjectItemForCheJian> projectListzyc = new ArrayList<>();
-    private ArrayList<ProjectItemForCheJian> projectListzhh = new ArrayList<>();
-    private ArrayList<ProjectItemForCheJian> projectListyxy = new ArrayList<>();
-    private String libaojunwenjiantonggao;
-    private String zhangyanchunwenjiantonggao;
-    private String zhuhonghaiwenjiantonggao;
-    private String yangxiuyuwenjiantonggao;
-    private String chejiandiaoduwenjiantonggao;
-    private String mahongyanwenjiantonggao;
-    private String sunyajunwenjiantonggao;
-    private String gaoliminwenjiantonggao;
-    private String huxvruiwenjiantonggao;
-    private String wangjianwenjiantonggao;
-    private String wanghuiranwenjiantonggao;
-    private String zhongjianlianglbj;
-    private String zhongjianliangzyc;
-    private String zhongjianliangzhh;
-    private String zhongjianliangyxy;
-    private String zhongjianliangcjdd;
-    private String zhongjianliangmhy;
-    private String zhongjianliangsyj;
-    private String zhongjianliangglm;
-    private String zhongjianlianghxr;
-    private String zhongjianliangwj;
-    private String zhongjianliangwhr;
-    private String abc;
+    private ImageView dongtaitaizhang;
+    private NiceVideoPlayer niceVideoPlayer;
 
     //这个应该是防止Fragment来回切的时候出错的
     @Override
@@ -96,6 +74,9 @@ public class CheJianFragment extends Fragment{
 
         scrollingTextView = (ScrollingTextView)viewForCheJian.findViewById(R.id.scrollingTextViewId);
         xBanner = (XBanner)viewForCheJian.findViewById(R.id.xbanner);
+        xBanner1 = (XBanner)viewForCheJian.findViewById(R.id.xbanner1);
+        dongtaitaizhang = (ImageView)viewForCheJian.findViewById(R.id.dongtaitaizhangimageview);
+        niceVideoPlayer = (viewForCheJian).findViewById(R.id.nicevideoplayer);
 
         //以下内容为滚动字幕中安全生产天数的计算
         calendarbeFore = Calendar.getInstance();
@@ -105,7 +86,7 @@ public class CheJianFragment extends Fragment{
         calendarNow.setTime(new Date());
         long timeNow = calendarNow.getTimeInMillis();
         long daysOfDuan = (timeNow - timeOfDuan) / 1000 / 60 / 60 / 24 - 1;
-        String msg = "安全优质、兴路强国     段安全生产" + daysOfDuan + "天 车间安全生产" + daysOfDuan + "天";
+        String msg = "不忘初心 牢记使命 交通强国 铁路先行     段安全生产" + daysOfDuan + "天 车间安全生产" + daysOfDuan + "天";
         scrollingTextView.setText(msg);
         scrollingTextView.setTextColor(Color.parseColor("#3D9140"));
 
@@ -114,12 +95,8 @@ public class CheJianFragment extends Fragment{
         tittle = new ArrayList<>();
         image.add(R.mipmap.chejiandongtai);
         image.add(R.mipmap.tianqiyubao1);
-        image.add(R.mipmap.anquanyujing);
-        image.add(R.mipmap.zhigongwencai);
         tittle.add("车间动态及通告");
         tittle.add("保定市今日限行");
-        tittle.add("每日安全预警");
-        tittle.add("车间职工文采");
         xBanner.setData(image, tittle);
         xBanner.setmAdapter(new XBanner.XBannerAdapter() {
             @SuppressLint("NewApi")
@@ -139,14 +116,6 @@ public class CheJianFragment extends Fragment{
                     Intent intent = new Intent(getActivity(),CommonWebViewActivity.class);
                     intent.putExtra("add","http://43.226.46.228/chejianjilunbo/baodingxianxing.html");
                     startActivity(intent);
-                } else if (position == 2) {
-                    Intent intent = new Intent(getActivity(),CommonWebViewActivity.class);
-                    intent.putExtra("add","http://43.226.46.228/chejianjilunbo/anquanyujing.html");
-                    startActivity(intent);
-                } else if (position == 3) {
-                    Intent intent = new Intent(getActivity(),CommonWebViewActivity.class);
-                    intent.putExtra("add","http://43.226.46.228/chejianjilunbo/miaobishenghua.html");
-                    startActivity(intent);
                 }
             }
         });
@@ -164,482 +133,150 @@ public class CheJianFragment extends Fragment{
             @Override
             public void OnClick(View view, int position) {
                 if (projectList.get(position).getImageId() == R.mipmap.chejianjieshao) {
-                    Intent intent = new Intent(getActivity(),CommonWebViewActivity.class);
-                    intent.putExtra("add","http://43.226.46.228/chejianjianjie/chejianjianjie.html");
+                    Intent intent = new Intent(getActivity(),CheJianJianJieActivity.class);
                     startActivity(intent);
                 } else if (projectList.get(position).getImageId() == R.mipmap.shangjiwenjian) {
                     Intent intent = new Intent(getActivity(),ShangJiWenJianActivity.class);
                     startActivity(intent);
                 } else if (projectList.get(position).getImageId() == R.mipmap.shigonganquan) {
-                    Intent intent = new Intent(getActivity(),CommonListView.class);
-                    intent.putExtra("addforhttp", "http://43.226.46.228/shigonganquan/shigonganquan.txt");
+                    Intent intent = new Intent(getActivity(),CommonSecondActivity.class);
+                    intent.putExtra("tittl","施工安全");
+                    intent.putExtra("add", "http://43.226.46.228/shigonganquan/shigonganquan.txt");
                     startActivity(intent);
                 } else if (projectList.get(position).getImageId() == R.mipmap.dangjianyutuan) {
-                    Intent intent = new Intent(getActivity(),CommonListView.class);
-                    intent.putExtra("addforhttp", "http://43.226.46.228/dangjianyutuan/dangjianyutuan.txt");
+                    Intent intent = new Intent(getActivity(),CommonSecondActivity.class);
+                    intent.putExtra("tittl","党团建设");
+                    intent.putExtra("add", "http://43.226.46.228/dangjianyutuan/dangjianyutuan.txt");
                     startActivity(intent);
                 } else if (projectList.get(position).getImageId() == R.mipmap.jianchabiaozhun) {
-                    Intent intent = new Intent(getActivity(), CommonListView.class);
-                    intent.putExtra("addforhttp", "http://43.226.46.228/jianchabiaozhun/jianchabiaozhun.txt");
+                    Intent intent = new Intent(getActivity(), CommonSecondActivity.class);
+                    intent.putExtra("tittl","检查标准");
+                    intent.putExtra("add", "http://43.226.46.228/jianchabiaozhun/jianchabiaozhun.txt");
                     startActivity(intent);
                 } else if (projectList.get(position).getImageId() == R.mipmap.biaozhunhuajianshe) {
-                    Intent intent = new Intent(getActivity(),CommonListView.class);
-                    intent.putExtra("addforhttp", "http://43.226.46.228/biaozhunhuajianshe/biaozhunhuajianshe.txt");
+                    Intent intent = new Intent(getActivity(),CommonSecondActivity.class);
+                    intent.putExtra("tittl","标准化建设");
+                    intent.putExtra("add", "http://43.226.46.228/biaozhunhuajianshe/biaozhunhuajianshe.txt");
                     startActivity(intent);
                 }else if (projectList.get(position).getImageId() == R.mipmap.qiangxianyanlian) {
-                    Intent intent = new Intent(getActivity(),CommonListView.class);
-                    intent.putExtra("addforhttp", "http://43.226.46.228/qiangxianyanlian/qiangxianyanlian.txt");
+                    Intent intent = new Intent(getActivity(),CommonSecondActivity.class);
+                    intent.putExtra("tittl","应急抢险");
+                    intent.putExtra("add", "http://43.226.46.228/qiangxianyanlian/qiangxianyanlian.txt");
                     startActivity(intent);
                 }else if (projectList.get(position).getImageId() == R.mipmap.guanlimuban) {
-                    Intent intent = new Intent(getActivity(), CommonListView.class);
-                    intent.putExtra("addforhttp", "http://43.226.46.228/guanlimuban/guanlimuban.txt");
+                    Intent intent = new Intent(getActivity(), CommonSecondActivity.class);
+                    intent.putExtra("tittl","管理模板");
+                    intent.putExtra("add", "http://43.226.46.228/guanlimuban/guanlimuban.txt");
                     startActivity(intent);
                 }else if (projectList.get(position).getImageId() == R.mipmap.zhuanyezhishi) {
-                    Intent intent = new Intent(getActivity(),CommonListView.class);
-                    intent.putExtra("addforhttp", "http://43.226.46.228/zhuanyezhishi/zhuanyezhishi.txt");
+                    Intent intent = new Intent(getActivity(),CommonSecondActivity.class);
+                    intent.putExtra("tittl","专业技能");
+                    intent.putExtra("add", "http://43.226.46.228/zhuanyezhishi/zhuanyezhishi.txt");
                     startActivity(intent);
                 }else if (projectList.get(position).getImageId() == R.mipmap.guizhangzhidu) {
-                    Intent intent = new Intent(getActivity(),CommonListView.class);
-                    intent.putExtra("addforhttp", "http://43.226.46.228/guizhangzhidu/guizhangzhidu.txt");
+                    Intent intent = new Intent(getActivity(),CommonSecondActivity.class);
+                    intent.putExtra("tittl","规章制度");
+                    intent.putExtra("add", "http://43.226.46.228/guizhangzhidu/guizhangzhidu.txt");
                     startActivity(intent);
                 }else if (projectList.get(position).getImageId() == R.mipmap.dianhuachuanzhen) {
                     Intent intent = new Intent(getActivity(), CommonWebViewActivity.class);
                     intent.putExtra("add","http://43.226.46.228/dianhuachuanzhen/dianhuachuanzhen.html");
                     startActivity(intent);
                 } else if (projectList.get(position).getImageId() == R.mipmap.jishulvli) {
-                    Intent intent = new Intent(getActivity(), TaiZhangWangTu.class);
+                    Intent intent = new Intent(getActivity(), TaiZhangWangTu2.class);
+                    startActivity(intent);
+                }  else if (projectList.get(position).getImageId() == R.mipmap.xiangguankaoshi) {
+                    Intent intent = new Intent(getActivity(),CommonSecondActivity.class);
+                    intent.putExtra("tittl","职教相关");
+                    intent.putExtra("add", "http://43.226.46.228/zhijiaoxiangguan/zhijiaoxiangguan.txt");
+                    startActivity(intent);
+                } else if (projectList.get(position).getImageId() == R.mipmap.jishuxuexi) {
+                    Intent intent = new Intent(getActivity(),CommonSecondActivity.class);
+                    intent.putExtra("tittl","人事财务");
+                    intent.putExtra("add", "http://43.226.46.228/renshicaiwu/renshicaiwu.txt");
                     startActivity(intent);
                 }
             }
         });
 
-        //李保军的recyclerview
-        initLiBaoJun();
-        RecyclerView recyclerViewL = (RecyclerView)viewForCheJian.findViewById(R.id.libaojunrecyclerview);
-
-        final QBadgeView qBadgeViewlbj = new QBadgeView(getActivity());
-        qBadgeViewlbj.bindTarget(recyclerViewL);
-        qBadgeViewlbj.setBadgeGravity(Gravity.CENTER);
-        qBadgeViewlbj.setVisibility(View.GONE);
-
-        libaojunwenjiantonggao = load("libaojun");
-        zhongjianlianglbj = libaojunwenjiantonggao;
-        dowithokhttplbj("http://43.226.46.228/notification/libaojunwenjiantonggao.txt", libaojunwenjiantonggao, qBadgeViewlbj);
-
-        GridLayoutManager layoutManagerL = new GridLayoutManager(getActivity(), 5);
-        recyclerViewL.setLayoutManager(layoutManagerL);
-        recyclerViewL.setNestedScrollingEnabled(false);
-        AdapterForZB adapterL = new AdapterForZB(getActivity(), projectListlbj);
-        recyclerViewL.setAdapter(adapterL);
-        adapterL.setOnItemClickListener(new AdapterForZB.OnItemClickListener() {
+        //动态台账
+        dongtaitaizhang.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void OnClick(View view, int position) {
-                if (projectListlbj.get(position).getImageId() == R.mipmap.gangweizhize) {
-                    Intent intent = new Intent(getActivity(), CommonWebViewActivity.class);
-                    intent.putExtra("add", "http://43.226.46.228/libaojun/libaojungangweizhize.html");
-                    startActivity(intent);
-                } else if (projectListlbj.get(position).getImageId() == R.mipmap.wenjiantonggao) {
-                    if (qBadgeViewlbj.isShown()) {
-                        qBadgeViewlbj.hide(true);
-                        write("libaojun", zhongjianlianglbj);
-                    }
-
-                    Intent intent = new Intent(getActivity(), CommonListView.class);
-                    intent.putExtra("addforhttp", "http://43.226.46.228/libaojun/libaojunwenjiantonggao.txt");
-                    startActivity(intent);
-                } else if (projectListlbj.get(position).getImageId() == R.mipmap.jishulvli) {
-                    Intent intent = new Intent(getActivity(),CommonListView.class);
-                    intent.putExtra("addforhttp", "http://43.226.46.228/libaojun/libaojunjishulvli.txt");
-                    startActivity(intent);
-                }
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),CommonSecondActivity.class);
+                intent.putExtra("tittl","车间动态台账");
+                intent.putExtra("add","http://43.226.46.228/dongtaitaizhang/dongtaitaizhang.txt");
+                startActivity(intent);
             }
         });
 
+        //车间企业文化视频
+       niceVideoPlayer.setPlayerType(NiceVideoPlayer.TYPE_IJK);
+       niceVideoPlayer.setUp("http://43.226.46.228/video/kanong.mp4",null);
+        TxVideoPlayerController controller = new TxVideoPlayerController(getActivity());
+        controller.setTitle("");
+        controller.setLenght(409000);
+        Glide.with(getActivity()).load("http://43.226.46.228/image/qiyewenhua/qiyewenhua.png")
+                .skipMemoryCache(true)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .into(controller.imageView());
+        niceVideoPlayer.setController(controller);
 
-
-        //张艳春的recyclerview
-        initZhangYanChun();
-        RecyclerView recyclerViewZYC = (RecyclerView)viewForCheJian.findViewById(R.id.zhangyanchunrecyclerview);
-
-        final QBadgeView qBadgeViewzyc = new QBadgeView(getActivity());
-        qBadgeViewzyc.bindTarget(recyclerViewZYC);
-        qBadgeViewzyc.setBadgeGravity(Gravity.CENTER);
-        qBadgeViewzyc.setVisibility(View.GONE);
-
-        zhangyanchunwenjiantonggao = load("zhangyanchun");
-        zhongjianliangzyc = zhangyanchunwenjiantonggao;
-        dowithokhttpzyc("http://43.226.46.228/notification/zhangyanchunwenjiantonggao.txt", zhangyanchunwenjiantonggao,qBadgeViewzyc);
-
-        GridLayoutManager layoutManagerZYC = new GridLayoutManager(getActivity(), 5);
-        recyclerViewZYC.setLayoutManager(layoutManagerZYC);
-        recyclerViewZYC.setNestedScrollingEnabled(false);
-        AdapterForZB adapterZYC = new AdapterForZB(getActivity(), projectListzyc);
-        recyclerViewZYC.setAdapter(adapterZYC);
-        adapterZYC.setOnItemClickListener(new AdapterForZB.OnItemClickListener() {
+        //奖状轮播
+        image1 = new ArrayList<>();
+        tittle1 = new ArrayList<>();
+        image1.add(R.mipmap.jz1);
+        image1.add(R.mipmap.jz2);
+        image1.add(R.mipmap.jz3);
+        image1.add(R.mipmap.jz4);
+        image1.add(R.mipmap.jz5);
+        image1.add(R.mipmap.jz6);
+        tittle1.add("光缆畅通无阻");
+        tittle1.add("五四红旗团支部");
+        tittle1.add("合作共赢比赛");
+        tittle1.add("2011年度先进集体");
+        tittle1.add("定点投篮比赛");
+        tittle1.add("安全风险管理知识竞赛");
+        xBanner1.setData(image1, tittle1);
+        xBanner1.setmAdapter(new XBanner.XBannerAdapter() {
+            @SuppressLint("NewApi")
             @Override
-            public void OnClick(View view, int position) {
-                if (projectListzyc.get(position).getImageId() == R.mipmap.gangweizhize) {
-                    Intent intent = new Intent(getActivity(),CommonWebViewActivity.class);
-                    intent.putExtra("add", "http://43.226.46.228/zhangyanchun/zhangyanchungangweizhize.html");
-                    startActivity(intent);
-                } else if (projectListzyc.get(position).getImageId() == R.mipmap.wenjiantonggao) {
-                    if (qBadgeViewzyc.isShown()) {
-                        qBadgeViewzyc.hide(true);
-                        write("zhangyanchun", zhongjianliangzyc);
-                    }
-
-                    Intent intent = new Intent(getActivity(), CommonListView.class);
-                    intent.putExtra("addforhttp", "http://43.226.46.228/zhangyanchun/zhangyanchunwenjiantonggao.txt");
-                    startActivity(intent);
-                } else if (projectListzyc.get(position).getImageId() == R.mipmap.jishulvli){
-                    Intent intent = new Intent(getActivity(), CommonListView.class);
-                    intent.putExtra("addforhttp", "http://43.226.46.228/zhangyanchun/zhangyanchunjishulvli.txt");
-                    startActivity(intent);
-                }
+            public void loadBanner(XBanner banner, Object model, View view, int position) {
+                Glide.with(Objects.requireNonNull(getActivity())).load(image1.get(position)).into((ImageView) view);
             }
         });
-
-        //朱红海的recyclerview
-        initZhuHongHai();
-        RecyclerView recyclerViewZHH = (RecyclerView)viewForCheJian.findViewById(R.id.zhuhonghairecyclerview);
-
-        final QBadgeView qBadgeViewzhh = new QBadgeView(getActivity());
-        qBadgeViewzhh.bindTarget(recyclerViewZHH);
-        qBadgeViewzhh.setBadgeGravity(Gravity.CENTER);
-        qBadgeViewzhh.setVisibility(View.GONE);
-
-        zhuhonghaiwenjiantonggao = load("zhuhonghai");
-        zhongjianliangzhh = zhuhonghaiwenjiantonggao;
-        dowithokhttpzhh("http://43.226.46.228/notification/zhuhonghaiwenjiantonggao.txt", zhuhonghaiwenjiantonggao,qBadgeViewzhh);
-
-        GridLayoutManager layoutManagerZHH = new GridLayoutManager(getActivity(), 5);
-        recyclerViewZHH.setLayoutManager(layoutManagerZHH);
-        recyclerViewZHH.setNestedScrollingEnabled(false);
-        AdapterForZB adapterZHH = new AdapterForZB(getActivity(), projectListzhh);
-        recyclerViewZHH.setAdapter(adapterZHH);
-        adapterZHH.setOnItemClickListener(new AdapterForZB.OnItemClickListener() {
+        xBanner1.setOnItemClickListener(new XBanner.OnItemClickListener() {
             @Override
-            public void OnClick(View view, int position) {
-                if (projectListzhh.get(position).getImageId() == R.mipmap.gangweizhize) {
-                    Intent intent = new Intent(getActivity(), CommonWebViewActivity.class);
-                    intent.putExtra("add", "http://43.226.46.228/zhuhonghai/zhuhonghaigangweizhize.html");
+            public void onItemClick(XBanner banner, int position) {
+                if (position == 0) {
+                    Intent intent = new Intent(getActivity(),MaxImageView.class);
+                    intent.putExtra("add","http://43.226.46.228/image/suohuojiangli/11.jpg");
                     startActivity(intent);
-                } else if (projectListzhh.get(position).getImageId() == R.mipmap.wenjiantonggao) {
-                    if (qBadgeViewzhh.isShown()) {
-                        qBadgeViewzhh.hide(true);
-                        write("zhuhonghai", zhongjianliangzhh);
-                    }
-
-                    Intent intent = new Intent(getActivity(), CommonListView.class);
-                    intent.putExtra("addforhttp", "http://43.226.46.228/zhuhonghai/zhuhonghaiwenjiantonggao.txt");
+                } else if (position == 1) {
+                    Intent intent = new Intent(getActivity(),MaxImageView.class);
+                    intent.putExtra("add","http://43.226.46.228/image/suohuojiangli/22.jpg");
                     startActivity(intent);
-                } else if (projectListzhh.get(position).getImageId() == R.mipmap.jishulvli) {
-                    Intent intent = new Intent(getActivity(), CommonListView.class);
-                    intent.putExtra("addforhttp", "http://43.226.46.228/zhuhonghai/zhuhonghaijishulvli.txt");
+                } else if (position == 2) {
+                    Intent intent = new Intent(getActivity(),MaxImageView.class);
+                    intent.putExtra("add","http://43.226.46.228/image/suohuojiangli/33.jpg");
                     startActivity(intent);
-                }
-            }
-        });
-
-        //杨秀玉的recyclerview
-        initYangXiuYu();
-        RecyclerView recyclerViewY = (RecyclerView)viewForCheJian.findViewById(R.id.yangxiuyurecyclerview);
-
-        final QBadgeView qBadgeViewyxy = new QBadgeView(getActivity());
-        qBadgeViewyxy.bindTarget(recyclerViewY);
-        qBadgeViewyxy.setBadgeGravity(Gravity.CENTER);
-        qBadgeViewyxy.setVisibility(View.GONE);
-
-        yangxiuyuwenjiantonggao = load("yangxiuyu");
-        zhongjianliangyxy = yangxiuyuwenjiantonggao;
-        dowithokhttpyxy("http://43.226.46.228/notification/yangxiuyuwenjiantonggao.txt", yangxiuyuwenjiantonggao,qBadgeViewyxy);
-
-        GridLayoutManager layoutManagerY = new GridLayoutManager(getActivity(), 5);
-        recyclerViewY.setLayoutManager(layoutManagerY);
-        recyclerViewY.setNestedScrollingEnabled(false);
-        AdapterForZB adapterY = new AdapterForZB(getActivity(), projectListyxy);
-        recyclerViewY.setAdapter(adapterY);
-        adapterY.setOnItemClickListener(new AdapterForZB.OnItemClickListener() {
-            @Override
-            public void OnClick(View view, int position) {
-                if (projectListyxy.get(position).getImageId() == R.mipmap.gangweizhize) {
-                    Intent intent = new Intent(getActivity(), CommonWebViewActivity.class);
-                    intent.putExtra("add", "http://43.226.46.228/yangxiuyu/yangxiuyugangweizhize.html");
+                } else if (position == 3) {
+                    Intent intent = new Intent(getActivity(),MaxImageView.class);
+                    intent.putExtra("add","http://43.226.46.228/image/suohuojiangli/44.jpg");
                     startActivity(intent);
-                } else if (projectListyxy.get(position).getImageId() == R.mipmap.wenjiantonggao) {
-                    if (qBadgeViewyxy.isShown()) {
-                        qBadgeViewyxy.hide(true);
-                        write("yangxiuyu", zhongjianliangyxy);
-                    }
-                    Intent intent = new Intent(getActivity(), CommonListView.class);
-                    intent.putExtra("addforhttp", "http://43.226.46.228/yangxiuyu/yangxiuyuwenjiantonggao.txt");
+                } else if (position == 4) {
+                    Intent intent = new Intent(getActivity(),MaxImageView.class);
+                    intent.putExtra("add","http://43.226.46.228/image/suohuojiangli/55.jpg");
                     startActivity(intent);
-                } else if (projectListyxy.get(position).getImageId() == R.mipmap.jishulvli) {
-                    Intent intent = new Intent(getActivity(), CommonListView.class);
-                    intent.putExtra("addforhttp", "http://43.226.46.228/yangxiuyu/yangxiuyujishulvli.txt");
+                } else if (position == 5) {
+                    Intent intent = new Intent(getActivity(),MaxImageView.class);
+                    intent.putExtra("add","http://43.226.46.228/image/suohuojiangli/66.jpg");
                     startActivity(intent);
                 }
             }
         });
 
-        //车间调度recyclerview
-        initForCheJianDiaoDu();
-        RecyclerView recyclerView1 = (RecyclerView)viewForCheJian.findViewById(R.id.chejiandiaodurecyclerview);
 
-        final QBadgeView qBadgeViewcjdd = new QBadgeView(getActivity());
-        qBadgeViewcjdd.bindTarget(recyclerView1);
-        qBadgeViewcjdd.setBadgeGravity(Gravity.CENTER);
-        qBadgeViewcjdd.setVisibility(View.GONE);
-
-        chejiandiaoduwenjiantonggao = load("chejiandiaodu");
-        zhongjianliangcjdd = chejiandiaoduwenjiantonggao;
-        dowithokhttpcjdd("http://43.226.46.228/notification/chejiandiaoduwenjiantonggao.txt", chejiandiaoduwenjiantonggao,qBadgeViewcjdd);
-
-        GridLayoutManager layoutManager1 = new GridLayoutManager(getActivity(), 5);
-        recyclerView1.setLayoutManager( layoutManager1);
-        recyclerView1.setNestedScrollingEnabled(false);
-        AdapterForZB adapter1 = new AdapterForZB(getActivity() ,projectList1);
-        recyclerView1.setAdapter( adapter1);
-        adapter1.setOnItemClickListener(new AdapterForZB.OnItemClickListener() {
-            @Override
-            public void OnClick(View view, int position) {
-                if (projectList1.get(position).getImageId() == R.mipmap.gangweizhize) {
-                    Intent intent = new Intent(getActivity(),CommonWebViewActivity.class);
-                    intent.putExtra("add", "http://43.226.46.228/chejiandiaodu/chejiandiaodugangweizhize.html");
-                    startActivity(intent);
-                } else if (projectList1.get(position).getImageId() == R.mipmap.zhongyaotongzhi) {
-                    if (qBadgeViewcjdd.isShown()) {
-                        qBadgeViewcjdd.hide(true);
-                        write("chejiandiaodu", zhongjianliangcjdd);
-                    }
-                    Intent intent = new Intent(getActivity(), CommonListView.class);
-                    intent.putExtra("addforhttp", "http://43.226.46.228/chejiandiaodu/chejiandiaoduzhongyaotongzhi.txt");
-                    startActivity(intent);
-                } else if (projectList1.get(position).getImageId() == R.mipmap.jishulvli) {
-                    Intent intent = new Intent(getActivity(), CommonListView.class);
-                    intent.putExtra("addforhttp", "http://43.226.46.228/chejiandiaodu/chejiandiaodujishulvli.txt");
-                    startActivity(intent);
-                }
-            }
-        });
-
-        //马红岩岗位recyclerview
-        initMaHongYan();
-        RecyclerView recyclerView2 = (RecyclerView)viewForCheJian.findViewById(R.id.mahongyanrecyclerview);
-
-        final QBadgeView qBadgeViewmhy = new QBadgeView(getActivity());
-        qBadgeViewmhy.bindTarget(recyclerView2);
-        qBadgeViewmhy.setBadgeGravity(Gravity.CENTER);
-        qBadgeViewmhy.setVisibility(View.GONE);
-
-        mahongyanwenjiantonggao = load("mahongyan");
-        zhongjianliangmhy = mahongyanwenjiantonggao;
-        dowithokhttpmhy("http://43.226.46.228/notification/mahongyanwenjiantonggao.txt", mahongyanwenjiantonggao,qBadgeViewmhy);
-
-        GridLayoutManager layoutManager2 = new GridLayoutManager(getActivity(), 5);
-        recyclerView2.setLayoutManager( layoutManager2);
-        recyclerView2.setNestedScrollingEnabled(false);
-        AdapterForZB adapter2 = new AdapterForZB(getActivity() ,projectListm);
-        recyclerView2.setAdapter( adapter2);
-        adapter2.setOnItemClickListener(new AdapterForZB.OnItemClickListener() {
-            @Override
-            public void OnClick(View view, int position) {
-                if (projectListm.get(position).getImageId() == R.mipmap.jishulvli) {
-                   Intent intent = new Intent(getActivity(),CommonListView.class);
-                   intent.putExtra("addforhttp","http://43.226.46.228/mahongyan/mahongyanjishulvli.txt");
-                   startActivity(intent);
-                } else if (projectListm.get(position).getImageId() == R.mipmap.gangweizhize) {
-                    Intent intent = new Intent(getActivity(), CommonWebViewActivity.class);
-                    intent.putExtra("add", "http://43.226.46.228/mahongyan/mahongyangangweizhize.html");
-                    startActivity(intent);
-                } else if (projectListm.get(position).getImageId() == R.mipmap.wenjiantonggao) {
-                    if (qBadgeViewmhy.isShown()) {
-                        qBadgeViewmhy.hide(true);
-                        write("mahongyan", zhongjianliangmhy);
-                    }
-                    startCommonListView("addforhttp", "http://43.226.46.228/mahongyan/mahongyanwenjiantonggao.txt");
-                }
-            }
-        });
-
-        //孙亚军岗位recyclerview
-        initSunYaJun();
-        RecyclerView recyclerView3 = (RecyclerView)viewForCheJian.findViewById(R.id.sunyajunrecyclerview);
-
-        final QBadgeView qBadgeViewsyj = new QBadgeView(getActivity());
-        qBadgeViewsyj.bindTarget(recyclerView3);
-        qBadgeViewsyj.setBadgeGravity(Gravity.CENTER);
-        qBadgeViewsyj.setVisibility(View.GONE);
-
-        sunyajunwenjiantonggao = load("sunyajun");
-        zhongjianliangsyj = sunyajunwenjiantonggao;
-        dowithokhttpsyj("http://43.226.46.228/notification/sunyajunwenjiantonggao.txt", sunyajunwenjiantonggao,qBadgeViewsyj);
-
-        GridLayoutManager layoutManager3 = new GridLayoutManager(getActivity(), 5);
-        recyclerView3.setLayoutManager( layoutManager3);
-        recyclerView3.setNestedScrollingEnabled(false);
-        AdapterForZB adapter3 = new AdapterForZB(getActivity() ,projectLists);
-        recyclerView3.setAdapter( adapter3);
-        adapter3.setOnItemClickListener(new AdapterForZB.OnItemClickListener() {
-            @Override
-            public void OnClick(View view, int position) {
-                if (projectLists.get(position).getImageId() == R.mipmap.jishulvli) {
-                    startCommonListView("addforhttp", "http://43.226.46.228/sunyajun/sunyajunjishulvli.txt");
-                } else if (projectLists.get(position).getImageId() == R.mipmap.gangweizhize) {
-                    startCommonWebViewActivity("add", "http://43.226.46.228/sunyajun/sunyajungangweizhize.html");
-                } else if (projectLists.get(position).getImageId() == R.mipmap.wenjiantonggao) {
-                    if (qBadgeViewsyj.isShown()) {
-                        qBadgeViewsyj.hide(true);
-                        write("sunyajun", zhongjianliangsyj);
-                    }
-                    startCommonListView("addforhttp", "http://43.226.46.228/sunyajun/sunyajunwenjiantonggao.txt");
-                } else if (projectLists.get(position).getImageId() == R.mipmap.jishuxuexi) {
-                    startCommonListView("addforhttp", "http://43.226.46.228/sunyajun/sunyajunjishuxuexi.txt");
-                } else if (projectLists.get(position).getImageId() == R.mipmap.xiangguankaoshi) {
-                    startCommonListView("addforhttp", "http://43.226.46.228/sunyajun/sunyajunkaoshixiangguan.txt");
-                }
-            }
-        });
-
-        //高利民岗位的recyclerview
-        initGaoLiMin();
-        RecyclerView recyclerView4 = (RecyclerView)viewForCheJian.findViewById(R.id.gaoliminrecyclerview);
-
-        final QBadgeView qBadgeViewglm = new QBadgeView(getActivity());
-        qBadgeViewglm.bindTarget(recyclerView4);
-        qBadgeViewglm.setBadgeGravity(Gravity.CENTER);
-        qBadgeViewglm.setVisibility(View.GONE);
-
-        gaoliminwenjiantonggao = load("gaolimin");
-        zhongjianliangglm = gaoliminwenjiantonggao;
-        dowithokhttpglm("http://43.226.46.228/notification/gaoliminwenjiantonggao.txt", gaoliminwenjiantonggao,qBadgeViewglm);
-
-        GridLayoutManager layoutManager4 = new GridLayoutManager(getActivity(), 5);
-        recyclerView4.setLayoutManager( layoutManager4);
-        recyclerView4.setNestedScrollingEnabled(false);
-        AdapterForZB adapter4 = new AdapterForZB(getActivity() ,projectListg);
-        recyclerView4.setAdapter( adapter4);
-        adapter4.setOnItemClickListener(new AdapterForZB.OnItemClickListener() {
-            @Override
-            public void OnClick(View view, int position) {
-                if (projectListg.get(position).getImageId() == R.mipmap.gangweizhize) {
-                    startCommonWebViewActivity("add", "http://43.226.46.228/gaolimin/gaolimingangweizhize.html");
-                } else if (projectListg.get(position).getImageId() == R.mipmap.wenjiantonggao){
-                    if (qBadgeViewglm.isShown()) {
-                        qBadgeViewglm.hide(true);
-                        write("gaolimin", zhongjianliangglm);
-                    }
-                    startCommonListView("addforhttp", "http://43.226.46.228/gaolimin/gaoliminwenjiantonggao.txt");
-                } else if (projectListg.get(position).getImageId() == R.mipmap.jishulvli) {
-                    startCommonListView("addforhttp", "http://43.226.46.228/gaolimin/gaoliminjishulvli.txt");
-                }
-            }
-        });
-
-        //胡旭瑞岗位的recyclerview
-        initHuXvRui();
-        RecyclerView recyclerView5 = (RecyclerView)viewForCheJian.findViewById(R.id.huxvruirecyclerview);
-
-        final QBadgeView qBadgeViewhxr = new QBadgeView(getActivity());
-        qBadgeViewhxr.bindTarget(recyclerView5);
-        qBadgeViewhxr.setBadgeGravity(Gravity.CENTER);
-        qBadgeViewhxr.setVisibility(View.GONE);
-
-        huxvruiwenjiantonggao = load("huxvrui");
-        zhongjianlianghxr = huxvruiwenjiantonggao;
-        dowithokhttphxr("http://43.226.46.228/notification/huxvruiwenjiantonggao.txt", huxvruiwenjiantonggao,qBadgeViewhxr);
-
-        GridLayoutManager layoutManager5 = new GridLayoutManager(getActivity(), 5);
-        recyclerView5.setLayoutManager( layoutManager5);
-        recyclerView5.setNestedScrollingEnabled(false);
-        AdapterForZB adapter5 = new AdapterForZB(getActivity() ,projectListh);
-        recyclerView5.setAdapter( adapter5);
-        adapter5.setOnItemClickListener(new AdapterForZB.OnItemClickListener() {
-            @Override
-            public void OnClick(View view, int position) {
-                if (projectListh.get(position).getImageId() == R.mipmap.gangweizhize) {
-                    startCommonWebViewActivity("add", "http://43.226.46.228/huxvrui/huxvruigangweizhize.html");
-                }else if(projectListh.get(position).getImageId() == R.mipmap.wenjiantonggao) {
-                    if (qBadgeViewhxr.isShown()) {
-                        qBadgeViewhxr.hide(true);
-                        write("huxvrui", zhongjianlianghxr);
-                    }
-                    startCommonListView("addforhttp", "http://43.226.46.228/huxvrui/huxvruiwenjiantonggao.txt");
-                } else if (projectListh.get(position).getImageId() == R.mipmap.jishulvli) {
-                    startCommonListView("addforhttp", "http://43.226.46.228/huxvrui/huxvruijishulvli.txt");
-                }
-            }
-        });
-
-        //王健岗位的recyclerview
-        initWangJian();
-        RecyclerView recyclerView6 = (RecyclerView)viewForCheJian.findViewById(R.id.wangjianrecyclerview);
-
-        final QBadgeView qBadgeViewwj = new QBadgeView(getActivity());
-        qBadgeViewwj.bindTarget(recyclerView6);
-        qBadgeViewwj.setBadgeGravity(Gravity.CENTER);
-        qBadgeViewwj.setVisibility(View.GONE);
-
-        wangjianwenjiantonggao = load("wangjian");
-        zhongjianliangwj = wangjianwenjiantonggao;
-        dowithokhttpwj("http://43.226.46.228/notification/wangjianwenjiantonggao.txt", wangjianwenjiantonggao,qBadgeViewwj);
-
-        GridLayoutManager layoutManager6 = new GridLayoutManager(getActivity(), 5);
-        recyclerView6.setLayoutManager( layoutManager6);
-        recyclerView6.setNestedScrollingEnabled(false);
-        AdapterForZB adapter6 = new AdapterForZB(getActivity() ,projectListwj);
-        recyclerView6.setAdapter( adapter6);
-        adapter6.setOnItemClickListener(new AdapterForZB.OnItemClickListener() {
-            @Override
-            public void OnClick(View view, int position) {
-                if (projectListwj.get(position).getImageId() == R.mipmap.gangweizhize) {
-                    startCommonWebViewActivity("add", "http://43.226.46.228/wangjian/wangjiangangweizhize.html");
-                } else if (projectListwj.get(position).getImageId() == R.mipmap.wenjiantonggao) {
-                    if(qBadgeViewwj.isShown()) {
-                        qBadgeViewwj.hide(true);
-                        write("wangjian", zhongjianliangwj);
-                    }
-                    startCommonListView("addforhttp", "http://43.226.46.228/wangjian/wangjianwenjiantonggao.txt");
-                } else if (projectListwj.get(position).getImageId() == R.mipmap.jishulvli) {
-                    startCommonListView("addforhttp", "http://43.226.46.228/wangjian/wangjianjishulvli.txt");
-                }
-            }
-        });
-
-        //王会然岗位的recyclerview
-        initWangHuiRan();
-        RecyclerView recyclerView7 = (RecyclerView)viewForCheJian.findViewById(R.id.wanghuiranrecyclerview);
-
-        final QBadgeView qBadgeViewwhr = new QBadgeView(getActivity());
-        qBadgeViewwhr.bindTarget(recyclerView7);
-        qBadgeViewwhr.setBadgeGravity(Gravity.CENTER);
-        qBadgeViewwhr.setVisibility(View.GONE);
-
-        wanghuiranwenjiantonggao = load("wanghuiran");
-        zhongjianliangwhr = wanghuiranwenjiantonggao;
-        dowithokhttpwhr("http://43.226.46.228/notification/wanghuiranwenjiantonggao.txt", wanghuiranwenjiantonggao,qBadgeViewwhr);
-
-        GridLayoutManager layoutManager7 = new GridLayoutManager(getActivity(), 5);
-        recyclerView7.setLayoutManager( layoutManager7);
-        recyclerView7.setNestedScrollingEnabled(false);
-        AdapterForZB adapter7 = new AdapterForZB(getActivity() ,projectListwhr);
-        recyclerView7.setAdapter( adapter7);
-        adapter7.setOnItemClickListener(new AdapterForZB.OnItemClickListener() {
-            @Override
-            public void OnClick(View view, int position) {
-                if (projectListwhr.get(position).getImageId() == R.mipmap.gangweizhize) {
-                    startCommonWebViewActivity("add", "http://43.226.46.228/wanghuiran/wanghuirangangweizhize.html");
-                } else if (projectListwhr.get(position).getImageId() == R.mipmap.wenjiantonggao) {
-                    if (qBadgeViewwhr.isShown()) {
-                        qBadgeViewwhr.hide(true);
-                        write("wanghuiran",zhongjianliangwhr);
-                    }
-                    startCommonListView("addforhttp", "http://43.226.46.228/wanghuiran/wanghuiranwenjiantonggao.txt");
-                } else if (projectListwhr.get(position).getImageId() == R.mipmap.jishulvli) {
-                    startCommonListView("addforhttp", "http://43.226.46.228/wanghuiran/wanghuiranjishulvli.txt");
-                }
-            }
-        });
 
         return viewForCheJian;
     }
@@ -662,7 +299,7 @@ public class CheJianFragment extends Fragment{
         projectList.add(qxyl);
         ProjectItemForCheJian glmb = new ProjectItemForCheJian("管理模板",R.mipmap.guanlimuban);
         projectList.add(glmb);
-        ProjectItemForCheJian zyzs = new ProjectItemForCheJian("专业知识",R.mipmap.zhuanyezhishi);
+        ProjectItemForCheJian zyzs = new ProjectItemForCheJian("专业技能",R.mipmap.zhuanyezhishi);
         projectList.add(zyzs);
         ProjectItemForCheJian gzzd = new ProjectItemForCheJian("规章制度",R.mipmap.guizhangzhidu);
         projectList.add(gzzd);
@@ -670,114 +307,13 @@ public class CheJianFragment extends Fragment{
         projectList.add(dhcz);
         ProjectItemForCheJian jsll = new ProjectItemForCheJian("台账网图",R.mipmap.jishulvli);
         projectList.add(jsll);
+        ProjectItemForCheJian zjxg = new ProjectItemForCheJian("职教相关",R.mipmap.xiangguankaoshi);
+        projectList.add(zjxg);
+        ProjectItemForCheJian rscw = new ProjectItemForCheJian("人事财务",R.mipmap.jishuxuexi);
+        projectList.add(rscw);
         }
 
-     private void initLiBaoJun() {
-        ProjectItemForCheJian aaa = new ProjectItemForCheJian("岗位职责", R.mipmap.gangweizhize);
-        projectListlbj.add(aaa);
-         ProjectItemForCheJian ccc = new ProjectItemForCheJian("文件备忘", R.mipmap.wenjianbeiwang);
-         projectListlbj.add(ccc);
-         ProjectItemForCheJian bbb = new ProjectItemForCheJian("文件通告", R.mipmap.wenjiantonggao);
-         projectListlbj.add(bbb);
-     }
 
-     private void initZhangYanChun() {
-         ProjectItemForCheJian aaa = new ProjectItemForCheJian("岗位职责", R.mipmap.gangweizhize);
-         projectListzyc.add(aaa);
-
-         ProjectItemForCheJian ccc = new ProjectItemForCheJian("文件备忘", R.mipmap.wenjianbeiwang);
-         projectListzyc.add(ccc);
-         ProjectItemForCheJian bbb = new ProjectItemForCheJian("文件通告", R.mipmap.wenjiantonggao);
-         projectListzyc.add(bbb);
-     }
-
-    private void initZhuHongHai() {
-        ProjectItemForCheJian aaa = new ProjectItemForCheJian("岗位职责", R.mipmap.gangweizhize);
-        projectListzhh.add(aaa);
-
-        ProjectItemForCheJian ccc = new ProjectItemForCheJian("文件备忘", R.mipmap.wenjianbeiwang);
-        projectListzhh.add(ccc);
-        ProjectItemForCheJian bbb = new ProjectItemForCheJian("文件通告", R.mipmap.wenjiantonggao);
-        projectListzhh.add(bbb);
-    }
-
-    private void initYangXiuYu() {
-        ProjectItemForCheJian aaa = new ProjectItemForCheJian("岗位职责", R.mipmap.gangweizhize);
-        projectListyxy.add(aaa);
-
-        ProjectItemForCheJian ccc = new ProjectItemForCheJian("文件备忘", R.mipmap.wenjianbeiwang);
-        projectListyxy.add(ccc);
-        ProjectItemForCheJian bbb = new ProjectItemForCheJian("文件通告", R.mipmap.wenjiantonggao);
-        projectListyxy.add(bbb);
-    }
-
-    private void initForCheJianDiaoDu() {
-        ProjectItemForCheJian diaodu1 = new ProjectItemForCheJian("岗位职责", R.mipmap.gangweizhize);
-        projectList1.add(diaodu1);
-        ProjectItemForCheJian diaodu3 = new ProjectItemForCheJian("文件备忘", R.mipmap.wenjianbeiwang);
-        projectList1.add(diaodu3);
-        ProjectItemForCheJian diaodu2 = new ProjectItemForCheJian("重要通知", R.mipmap.zhongyaotongzhi);
-        projectList1.add(diaodu2);
-    }
-
-    private void initMaHongYan() {
-        ProjectItemForCheJian mahongyan1 = new ProjectItemForCheJian("岗位职责", R.mipmap.gangweizhize);
-        projectListm.add(mahongyan1);
-
-        ProjectItemForCheJian mahongyan3 = new ProjectItemForCheJian("文件备忘", R.mipmap.wenjianbeiwang);
-        projectListm.add(mahongyan3);
-        ProjectItemForCheJian mahongyan2 = new ProjectItemForCheJian("文件通告", R.mipmap.wenjiantonggao);
-        projectListm.add(mahongyan2);
-    }
-    private void initSunYaJun() {
-        ProjectItemForCheJian sunyajun1 = new ProjectItemForCheJian("岗位职责", R.mipmap.gangweizhize);
-        projectLists.add(sunyajun1);
-
-        ProjectItemForCheJian sunyajun3 = new ProjectItemForCheJian("技术学习", R.mipmap.jishuxuexi);
-        projectLists.add(sunyajun3);
-        ProjectItemForCheJian sunyajun2 = new ProjectItemForCheJian("文件通告", R.mipmap.wenjiantonggao);
-        projectLists.add(sunyajun2);
-        ProjectItemForCheJian sunyajun4 = new ProjectItemForCheJian("考试相关", R.mipmap.xiangguankaoshi);
-        projectLists.add(sunyajun4);
-        ProjectItemForCheJian sunyajun5 = new ProjectItemForCheJian("文件备忘", R.mipmap.wenjianbeiwang);
-        projectLists.add(sunyajun5);
-    }
-    private void initGaoLiMin() {
-        ProjectItemForCheJian mahongyan1 = new ProjectItemForCheJian("岗位职责", R.mipmap.gangweizhize);
-        projectListg.add(mahongyan1);
-
-        ProjectItemForCheJian mahongyan3 = new ProjectItemForCheJian("文件备忘", R.mipmap.wenjianbeiwang);
-        projectListg.add(mahongyan3);
-        ProjectItemForCheJian mahongyan2 = new ProjectItemForCheJian("文件通告", R.mipmap.wenjiantonggao);
-        projectListg.add(mahongyan2);
-    }
-    private void initHuXvRui() {
-        ProjectItemForCheJian mahongyan1 = new ProjectItemForCheJian("岗位职责", R.mipmap.gangweizhize);
-        projectListh.add(mahongyan1);
-
-        ProjectItemForCheJian mahongyan3 = new ProjectItemForCheJian("文件备忘", R.mipmap.wenjianbeiwang);
-        projectListh.add(mahongyan3);
-        ProjectItemForCheJian mahongyan2 = new ProjectItemForCheJian("文件通告", R.mipmap.wenjiantonggao);
-        projectListh.add(mahongyan2);
-    }
-    private void initWangJian() {
-        ProjectItemForCheJian mahongyan1 = new ProjectItemForCheJian("岗位职责", R.mipmap.gangweizhize);
-        projectListwj.add(mahongyan1);
-
-        ProjectItemForCheJian mahongyan3 = new ProjectItemForCheJian("文件备忘", R.mipmap.wenjianbeiwang);
-        projectListwj.add(mahongyan3);
-        ProjectItemForCheJian mahongyan2 = new ProjectItemForCheJian("文件通告", R.mipmap.wenjiantonggao);
-        projectListwj.add(mahongyan2);
-    }
-    private void initWangHuiRan() {
-        ProjectItemForCheJian mahongyan1 = new ProjectItemForCheJian("岗位职责", R.mipmap.gangweizhize);
-        projectListwhr.add(mahongyan1);
-
-        ProjectItemForCheJian mahongyan3 = new ProjectItemForCheJian("文件备忘", R.mipmap.wenjianbeiwang);
-        projectListwhr.add(mahongyan3);
-        ProjectItemForCheJian mahongyan2 = new ProjectItemForCheJian("文件通告", R.mipmap.wenjiantonggao);
-        projectListwhr.add(mahongyan2);
-    }
 
     private void startCommonListView(String addforhttp, String url) {
         Intent intent = new Intent(getActivity(), CommonListView.class);
@@ -836,336 +372,6 @@ public class CheJianFragment extends Fragment{
         }
     }
 
-    private void dowithokhttplbj(final String url, final String wenjiantonggao, final QBadgeView qBadgeView) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    OkHttpClient client = new OkHttpClient();
-                    Request request = new Request.Builder()
-                            .url(url)
-                            .build();
-                    Response response = client.newCall(request).execute();
-                    assert response.body() != null;
-                    final String responseData = response.body().string();
-
-                    if (!wenjiantonggao.equals(responseData)) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                qBadgeView.setVisibility(View.VISIBLE);
-                                qBadgeView.setBadgeText("有新通告");
-                                zhongjianlianglbj = responseData;
-                            }
-                        });
-                    }
-
-                }catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
-    private void dowithokhttpzyc(final String url, final String wenjiantonggao, final QBadgeView qBadgeView) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    OkHttpClient client = new OkHttpClient();
-                    Request request = new Request.Builder()
-                            .url(url)
-                            .build();
-                    Response response = client.newCall(request).execute();
-                    assert response.body() != null;
-                    final String responseData = response.body().string();
-
-                    if (!wenjiantonggao.equals(responseData)) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                qBadgeView.setVisibility(View.VISIBLE);
-                                qBadgeView.setBadgeText("有新通告");
-                                zhongjianliangzyc = responseData;
-                            }
-                        });
-                    }
-
-                }catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
-    private void dowithokhttpzhh(final String url, final String wenjiantonggao, final QBadgeView qBadgeView) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    OkHttpClient client = new OkHttpClient();
-                    Request request = new Request.Builder()
-                            .url(url)
-                            .build();
-                    Response response = client.newCall(request).execute();
-                    assert response.body() != null;
-                    final String responseData = response.body().string();
-
-                    if (!wenjiantonggao.equals(responseData)) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                qBadgeView.setVisibility(View.VISIBLE);
-                                qBadgeView.setBadgeText("有新通告");
-                                zhongjianliangzhh = responseData;
-                            }
-                        });
-                    }
-
-                }catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
-    private void dowithokhttpyxy(final String url, final String wenjiantonggao, final QBadgeView qBadgeView) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    OkHttpClient client = new OkHttpClient();
-                    Request request = new Request.Builder()
-                            .url(url)
-                            .build();
-                    Response response = client.newCall(request).execute();
-                    assert response.body() != null;
-                    final String responseData = response.body().string();
-
-                    if (!wenjiantonggao.equals(responseData)) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                qBadgeView.setVisibility(View.VISIBLE);
-                                qBadgeView.setBadgeText("有新通告");
-                                zhongjianliangyxy = responseData;
-                            }
-                        });
-                    }
-
-                }catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
-    private void dowithokhttpcjdd(final String url, final String wenjiantonggao, final QBadgeView qBadgeView) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    OkHttpClient client = new OkHttpClient();
-                    Request request = new Request.Builder()
-                            .url(url)
-                            .build();
-                    Response response = client.newCall(request).execute();
-                    assert response.body() != null;
-                    final String responseData = response.body().string();
-
-                    if (!wenjiantonggao.equals(responseData)) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                qBadgeView.setVisibility(View.VISIBLE);
-                                qBadgeView.setBadgeText("有新通告");
-                                zhongjianliangcjdd = responseData;
-                            }
-                        });
-                    }
-
-                }catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
-    private void dowithokhttpmhy(final String url, final String wenjiantonggao, final QBadgeView qBadgeView) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    OkHttpClient client = new OkHttpClient();
-                    Request request = new Request.Builder()
-                            .url(url)
-                            .build();
-                    Response response = client.newCall(request).execute();
-                    assert response.body() != null;
-                    final String responseData = response.body().string();
-
-                    if (!wenjiantonggao.equals(responseData)) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                qBadgeView.setVisibility(View.VISIBLE);
-                                qBadgeView.setBadgeText("有新通告");
-                                zhongjianliangmhy = responseData;
-                            }
-                        });
-                    }
-
-                }catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
-    private void dowithokhttpsyj(final String url, final String wenjiantonggao, final QBadgeView qBadgeView) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    OkHttpClient client = new OkHttpClient();
-                    Request request = new Request.Builder()
-                            .url(url)
-                            .build();
-                    Response response = client.newCall(request).execute();
-                    assert response.body() != null;
-                    final String responseData = response.body().string();
-
-                    if (!wenjiantonggao.equals(responseData)) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                qBadgeView.setVisibility(View.VISIBLE);
-                                qBadgeView.setBadgeText("有新通告");
-                                zhongjianliangsyj = responseData;
-                            }
-                        });
-                    }
-
-                }catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
-    private void dowithokhttpglm(final String url, final String wenjiantonggao, final QBadgeView qBadgeView) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    OkHttpClient client = new OkHttpClient();
-                    Request request = new Request.Builder()
-                            .url(url)
-                            .build();
-                    Response response = client.newCall(request).execute();
-                    assert response.body() != null;
-                    final String responseData = response.body().string();
-
-                    if (!wenjiantonggao.equals(responseData)) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                qBadgeView.setVisibility(View.VISIBLE);
-                                qBadgeView.setBadgeText("有新通告");
-                                zhongjianliangglm = responseData;
-                            }
-                        });
-                    }
-
-                }catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
-    private void dowithokhttphxr(final String url, final String wenjiantonggao, final QBadgeView qBadgeView) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    OkHttpClient client = new OkHttpClient();
-                    Request request = new Request.Builder()
-                            .url(url)
-                            .build();
-                    Response response = client.newCall(request).execute();
-                    assert response.body() != null;
-                    final String responseData = response.body().string();
-
-                    if (!wenjiantonggao.equals(responseData)) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                qBadgeView.setVisibility(View.VISIBLE);
-                                qBadgeView.setBadgeText("有新通告");
-                                zhongjianlianghxr = responseData;
-                            }
-                        });
-                    }
-
-                }catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
-    private void dowithokhttpwj(final String url, final String wenjiantonggao, final QBadgeView qBadgeView) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    OkHttpClient client = new OkHttpClient();
-                    Request request = new Request.Builder()
-                            .url(url)
-                            .build();
-                    Response response = client.newCall(request).execute();
-                    assert response.body() != null;
-                    final String responseData = response.body().string();
-
-                    if (!wenjiantonggao.equals(responseData)) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                qBadgeView.setVisibility(View.VISIBLE);
-                                qBadgeView.setBadgeText("有新通告");
-                                zhongjianliangwj = responseData;
-                            }
-                        });
-                    }
-
-                }catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
-    private void dowithokhttpwhr(final String url, final String wenjiantonggao, final QBadgeView qBadgeView) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    OkHttpClient client = new OkHttpClient();
-                    Request request = new Request.Builder()
-                            .url(url)
-                            .build();
-                    Response response = client.newCall(request).execute();
-                    assert response.body() != null;
-                    final String responseData = response.body().string();
-
-                    if (!wenjiantonggao.equals(responseData)) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                qBadgeView.setVisibility(View.VISIBLE);
-                                qBadgeView.setBadgeText("有新通告");
-                                zhongjianliangwhr = responseData;
-                            }
-                        });
-                    }
-
-                }catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
 
     @Override
     public void onResume() {
@@ -1177,5 +383,6 @@ public class CheJianFragment extends Fragment{
     public void onStop() {
         super.onStop();
         xBanner.stopAutoPlay();
+        NiceVideoPlayerManager.instance().releaseNiceVideoPlayer();
     }
 }

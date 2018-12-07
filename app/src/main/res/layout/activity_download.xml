@@ -10,7 +10,7 @@
         android:gravity="center"
         android:textColor="#000000"
         android:textSize="20dp"
-        android:text="请识别下方二维码"/>
+        android:text="识别下方二维码可下载本软件"/>
 
     <ImageView
         android:layout_width="match_parent"

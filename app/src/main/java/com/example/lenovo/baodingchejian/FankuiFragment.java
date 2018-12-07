@@ -30,9 +30,10 @@ import q.rorbin.badgeview.QBadgeView;
 public class FankuiFragment extends Fragment{
     private final String update = BuildConfig.VERSION_NAME;
     private ListView listView;
-    private String[] data = {"声明：\n本软件为铁路内部使用，其他人员禁止下载及使用，否则追究法律责任！",
+    private String[] data = {"声明：\n1、本软件仅供内部使用；\n2、软件内个别图片来源于网络，若涉及侵权请及时联系作者删除。",
     "版本：\n" + update,
-    "反馈：\n若发现本软件内容有错误或者需要修改的地方，或者对本软件有更好的建议，请联系作者邮箱--192388546@qq.com，不胜感谢!",
+    "反馈：\n若发现本软件内容有错误或者需要修改的地方，或者对本软件有更好的建议，请联系作者，不胜感谢!",
+            "联系作者：\n邮箱：192388546@qq.com",
     "检查新版本"};
 
     @Nullable

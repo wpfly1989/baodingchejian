@@ -44,20 +44,21 @@ public class WenJianSouSuo extends AppCompatActivity {
         searchView.setSubmitButtonEnabled(true);
         searchView.setQueryHint("请输入关键字");
 
-        downloadParseJson("http://43.226.46.228/wenjianxitong/changxiaowenjian/changxiaowenjian.txt",commonListViewItemList1,add1);
-        downloadParseJson("http://43.226.46.228/wenjianxitong/suoyouwenjian/suoyouwenjian.txt",commonListViewItemList2,add2);
+        downloadParseJson("http://43.226.46.228/wenjianxitong/chaxunwenjian.txt",commonListViewItemList1,add1);
+        //downloadParseJson("http://43.226.46.228/wenjianxitong/changxiaowenjian/changxiaowenjian.txt",commonListViewItemList1,add1);
+        //downloadParseJson("http://43.226.46.228/wenjianxitong/suoyouwenjian/suoyouwenjian.txt",commonListViewItemList2,add2);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 commonListViewItemListSearch.clear();
                 addSearch.clear();
-                for (CommonListViewItem commonListViewItem : commonListViewItemList2) {
+                /*for (CommonListViewItem commonListViewItem : commonListViewItemList2) {
                     if (commonListViewItem.getName().contains(query)) {
                         commonListViewItemListSearch.add(commonListViewItem);
                         addSearch.add(add2.get(commonListViewItemList2.indexOf(commonListViewItem)));
                     }
-                }
+                }*/
                 for(CommonListViewItem commonListViewItem : commonListViewItemList1) {
                     if (commonListViewItem.getName().contains(query)) {
                         commonListViewItemListSearch.add(commonListViewItem);

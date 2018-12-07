@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".WenJianBeiWangTianJia">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp">
+        <ImageView
+            android:id="@+id/wenjianbeiwangtianjiafanhui"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_arrow_back_red_a700_36dp"/>
+        <ImageView
+            android:id="@+id/wenjianbeiwangtianjiaqueren"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/ic_check_red_a700_36dp"/>
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginTop="5dp"
+        android:background="#C0C0C0"/>
+    <ProgressBar
+        android:id="@+id/wenjianbeiwangtianjiaprogressbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <ListView
+        android:id="@+id/wenjianbeiwangtianjialistview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:dividerHeight="3dp"></ListView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginTop="5dp"
+        android:background="#C0C0C0"/>
+
+</LinearLayout>

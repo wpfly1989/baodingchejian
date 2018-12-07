@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.lenovo.baodingchejian">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
@@ -8,13 +9,15 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/baodingchejianicon_conew1"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
             android:name=".MainActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="保定车间" />
         <activity android:name=".BanZuXinXi" />
         <activity android:name=".CommonWebViewActivity" />
@@ -32,10 +35,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TaiZhangWangTu" />
         <activity android:name=".WenJianSouSuo" />
         <activity android:name=".SubsamplingImageActivity" />
-        <activity android:name=".WangTuHuanTuListView"></activity>
+        <activity android:name=".WangTuHuanTuListView" />
+        <activity android:name=".CheJianJianJieActivity" />
+        <activity android:name=".CommonSecondActivity" />
+        <activity android:name=".TaiZhangWangTu2" />
+        <activity android:name=".TangZhangWangTuSecondActivity"></activity>
     </application>
 
 </manifest>

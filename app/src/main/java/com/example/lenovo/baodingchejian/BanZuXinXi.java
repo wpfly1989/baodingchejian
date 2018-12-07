@@ -29,6 +29,7 @@ public class BanZuXinXi extends AppCompatActivity {
         //从上个activity获取数据
         Intent intent = getIntent();
         final String data = intent.getStringExtra("name");
+        final String wjbw = intent.getStringExtra("wenjianbeiwangname");
 
         scrollingTextView = (TextView)findViewById(R.id.anquanshengchantianshu);
         banzuxinxiBiaoTi = (TextView)findViewById(R.id.banzuxinxiBiaoTi);
@@ -37,11 +38,9 @@ public class BanZuXinXi extends AppCompatActivity {
             scrollingTextView.setText("班组安全生产" + Long.toString(daysOfBaoDingDong()) + "天");
         } else if (data.contains("白沟")){
             scrollingTextView.setText("班组安全生产" + Long.toString(daysOfBaoDingDong() - 1236) + "天");
-            //scrollingTextView.setText("班组安全生产" + Long.toString(daysOfBaoDingDong() + 865) + "天");
         } else {
             scrollingTextView.setText("班组安全生产" + Long.toString(daysOfBaoDingDong() + 865) + "天");
         }
-        //scrollingTextView.setText("这是测试");
 
         initBanZuXinXi();
         AdapterForBanZuXinXi adapter = new AdapterForBanZuXinXi(BanZuXinXi.this,R.layout.layout4, arrayList);
@@ -147,54 +146,8 @@ public class BanZuXinXi extends AppCompatActivity {
                         default:
                             break;
                     }
-                } else if (arrayList.get(position).getImageId() == R.mipmap.guanneiwangtu) {
-                    switch (data) {
-                        case "高碑店通信工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/guanneiwangtu/gaobeidianguanneiwangtu.txt");
-                            break;
-                        case "固城通信工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/guanneiwangtu/guchengguanneiwangtu.txt");
-                            break;
-                        case "保定通信工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/guanneiwangtu/baodingguanneiwangtu.txt");
-                            break;
-                        case "保定南通信工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/guanneiwangtu/baodingnanguanneiwangtu.txt");
-                            break;
-                        case "望都通信工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/guanneiwangtu/wangduguanneiwangtu.txt");
-                            break;
-                        case "定州通信工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/guanneiwangtu/dingzhouguanneiwangtu.txt");
-                            break;
-                        case "新乐通信工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/guanneiwangtu/xinleguanneiwangtu.txt");
-                            break;
-                        case "白沟通信工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/guanneiwangtu/baigouguanneiwangtu.txt");
-                            break;
-                        case "保定东高铁通信工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/guanneiwangtu/baodingdonggaotieguanneiwangtu.txt");
-                            break;
-                        case "定州东高铁通信工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/guanneiwangtu/dingzhoudonggaotieguanneiwangtu.txt");
-                            break;
-                        case "无线集中修工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/guanneiwangtu/wuxianguanneiwangtu.txt");
-                            break;
-                        case "保定光电工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/guanneiwangtu/guangdianguanneiwangtu.txt");
-                            break;
-                        case "网监室" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/guanneiwangtu/wangjianguanneiwangtu.txt");
-                            break;
-                        case "电报所" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/guanneiwangtu/dianbaosuoguanneiwangtu.txt");
-                            break;
-                        default:
-                            break;
-                    }
-                } else if (arrayList.get(position).getImageId() == R.mipmap.gongqudianhuaben) {
+                }
+                else if (arrayList.get(position).getImageId() == R.mipmap.gongqudianhuaben) {
                     switch (data) {
                         case "高碑店通信工区" :
                             startCommonWebViewActivity("add", "http://43.226.46.228/gongqudianhuaben/gaobeidiangongqudianhuaben.html");
@@ -288,54 +241,8 @@ public class BanZuXinXi extends AppCompatActivity {
                         default:
                             break;
                     }
-                } else if (arrayList.get(position).getImageId() == R.mipmap.jifangpingmiantu) {
-                    switch (data) {
-                        case "高碑店通信工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/jifangshebeipingmiantu/gaobeidianjifangshebeipingmiantu.txt");
-                            break;
-                        case "固城通信工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/jifangshebeipingmiantu/guchengjifangshebeipingmiantu.txt");
-                            break;
-                        case "保定通信工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/jifangshebeipingmiantu/baodingjifangshebeipingmiantu.txt");
-                            break;
-                        case "保定南通信工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/jifangshebeipingmiantu/baodingnanjifangshebeipingmiantu.txt");
-                            break;
-                        case "望都通信工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/jifangshebeipingmiantu/wangdujifangshebeipingmiantu.txt");
-                            break;
-                        case "定州通信工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/jifangshebeipingmiantu/dingzhoujifangshebeipingmiantu.txt");
-                            break;
-                        case "新乐通信工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/jifangshebeipingmiantu/xinlejifangshebeipingmiantu.txt");
-                            break;
-                        case "白沟通信工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/jifangshebeipingmiantu/baigoujifangshebeipingmiantu.txt");
-                            break;
-                        case "保定东高铁通信工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/jifangshebeipingmiantu/baodingdonggaotiejifangshebeipingmiantu.txt");
-                            break;
-                        case "定州东高铁通信工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/jifangshebeipingmiantu/dingzhoudonggaotiejifangshebeipingmiantu.txt");
-                            break;
-                        case "无线集中修工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/jifangshebeipingmiantu/wuxianjifangshebeipingmiantu.txt");
-                            break;
-                        case "保定光电工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/jifangshebeipingmiantu/guangdianjifangshebeipingmiantu.txt");
-                            break;
-                        case "网监室" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/jifangshebeipingmiantu/wangjianjifangshebeipingmiantu.txt");
-                            break;
-                        case "电报所" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/jifangshebeipingmiantu/dianbaosuojifangshebeipingmiantu.txt");
-                            break;
-                        default:
-                            break;
-                    }
-                } else if (arrayList.get(position).getImageId() == R.mipmap.yingjiyuan) {
+                }
+                else if (arrayList.get(position).getImageId() == R.mipmap.yingjiyuan) {
                     switch (data) {
                         case "高碑店通信工区" :
                             startCommonListView("addforhttp", "http://43.226.46.228/yingjiyuan/gaobeidianyingjiyuan.txt");
@@ -382,53 +289,7 @@ public class BanZuXinXi extends AppCompatActivity {
                         default:
                             break;
                     }
-                } else if (arrayList.get(position).getImageId() == R.mipmap.duankoutaizhang) {
-                    switch (data) {
-                        case "高碑店通信工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/duankoutaizhang/gaobeidianduankoutaizhang.txt");
-                            break;
-                        case "固城通信工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/duankoutaizhang/guchengduankoutaizhang.txt");
-                            break;
-                        case "保定通信工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/duankoutaizhang/baodingduankoutaizhang.txt");
-                            break;
-                        case "保定南通信工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/duankoutaizhang/baodingnanduankoutaizhang.txt");
-                            break;
-                        case "望都通信工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/duankoutaizhang/wangduduankoutaizhang.txt");
-                            break;
-                        case "定州通信工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/duankoutaizhang/dingzhouduankoutaizhang.txt");
-                            break;
-                        case "新乐通信工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/duankoutaizhang/xinleduankoutaizhang.txt");
-                            break;
-                        case "白沟通信工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/duankoutaizhang/baigouduankoutaizhang.txt");
-                            break;
-                        case "保定东高铁通信工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/duankoutaizhang/baodingdonggaotieduankoutaizhang.txt");
-                            break;
-                        case "定州东高铁通信工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/duankoutaizhang/dingzhoudonggaotieduankoutaizhang.txt");
-                            break;
-                        case "无线集中修工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/duankoutaizhang/wuxianduankoutaizhang.txt");
-                            break;
-                        case "保定光电工区" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/duankoutaizhang/guangdianduankoutaizhang.txt");
-                            break;
-                        case "网监室" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/duankoutaizhang/wangjianduankoutaizhang.txt");
-                            break;
-                        case "电报所" :
-                            startCommonListView("addforhttp", "http://43.226.46.228/duankoutaizhang/dianbaosuoduankoutaizhang.txt");
-                            break;
-                        default:
-                            break;
-                    }
+
                 }
             }
         });
@@ -440,18 +301,12 @@ public class BanZuXinXi extends AppCompatActivity {
         arrayList.add(gqjs);
         ProjectItemForBanZuXinXi bzfm = new ProjectItemForBanZuXinXi("班组风貌", R.mipmap.banzufengmao);
         arrayList.add(bzfm);
-        ProjectItemForBanZuXinXi gnwt = new ProjectItemForBanZuXinXi("管内网图", R.mipmap.guanneiwangtu);
-        arrayList.add(gnwt);
         ProjectItemForBanZuXinXi dhb = new ProjectItemForBanZuXinXi("工区电话本", R.mipmap.gongqudianhuaben);
         arrayList.add(dhb);
-        ProjectItemForBanZuXinXi pmt = new ProjectItemForBanZuXinXi("机房设备平面图", R.mipmap.jifangpingmiantu);
-        arrayList.add(pmt);
         ProjectItemForBanZuXinXi dwdh = new ProjectItemForBanZuXinXi("定位导航", R.mipmap.dingweidaohang);
         arrayList.add(dwdh);
         ProjectItemForBanZuXinXi yjya = new ProjectItemForBanZuXinXi("应急预案", R.mipmap.yingjiyuan);
         arrayList.add(yjya);
-        ProjectItemForBanZuXinXi dktz = new ProjectItemForBanZuXinXi("端口台账", R.mipmap.duankoutaizhang);
-        arrayList.add(dktz);
     }
 
     private long daysOfBaoDingDong() {
