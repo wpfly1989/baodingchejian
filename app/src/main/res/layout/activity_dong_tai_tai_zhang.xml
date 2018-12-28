@@ -5,17 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".TangZhangWangTuSecondActivity">
+    tools:context=".DongTaiTaiZhang">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/taizhangwangtu2toolbar"
+        android:id="@+id/dongtaitaizhangtoolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
     <net.lucode.hackware.magicindicator.MagicIndicator
-        android:id="@+id/taizhangwangtu2magic"
+        android:id="@+id/dongtaitaizhangmagic"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#F0FFFF"/>
@@ -24,7 +24,7 @@
         android:layout_height="1dp"
         android:background="#8A2BE2"/>
     <FrameLayout
-        android:id="@+id/taizhangwangtu2contentframelayout"
+        android:id="@+id/dongtaitaizhangFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>

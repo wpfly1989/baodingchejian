@@ -41,7 +41,8 @@
         <activity android:name=".CheJianJianJieActivity" />
         <activity android:name=".CommonSecondActivity" />
         <activity android:name=".TaiZhangWangTu2" />
-        <activity android:name=".TangZhangWangTuSecondActivity"></activity>
+        <activity android:name=".TangZhangWangTuSecondActivity" />
+        <activity android:name=".DongTaiTaiZhang"></activity>
     </application>
 
 </manifest>

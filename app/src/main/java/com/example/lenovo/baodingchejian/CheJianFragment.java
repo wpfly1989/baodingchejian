@@ -192,7 +192,7 @@ public class CheJianFragment extends Fragment{
                     startActivity(intent);
                 } else if (projectList.get(position).getImageId() == R.mipmap.jishuxuexi) {
                     Intent intent = new Intent(getActivity(),CommonSecondActivity.class);
-                    intent.putExtra("tittl","人事财务");
+                    intent.putExtra("tittl","职工需知");
                     intent.putExtra("add", "http://43.226.46.228/renshicaiwu/renshicaiwu.txt");
                     startActivity(intent);
                 }
@@ -203,9 +203,9 @@ public class CheJianFragment extends Fragment{
         dongtaitaizhang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),CommonSecondActivity.class);
-                intent.putExtra("tittl","车间动态台账");
-                intent.putExtra("add","http://43.226.46.228/dongtaitaizhang/dongtaitaizhang.txt");
+                Intent intent = new Intent(getActivity(),DongTaiTaiZhang.class);
+                //intent.putExtra("tittl","车间动态台账");
+                //intent.putExtra("add","http://43.226.46.228/dongtaitaizhang/dongtaitaizhang.txt");
                 startActivity(intent);
             }
         });
@@ -309,7 +309,7 @@ public class CheJianFragment extends Fragment{
         projectList.add(jsll);
         ProjectItemForCheJian zjxg = new ProjectItemForCheJian("职教相关",R.mipmap.xiangguankaoshi);
         projectList.add(zjxg);
-        ProjectItemForCheJian rscw = new ProjectItemForCheJian("人事财务",R.mipmap.jishuxuexi);
+        ProjectItemForCheJian rscw = new ProjectItemForCheJian("职工需知",R.mipmap.jishuxuexi);
         projectList.add(rscw);
         }
 

@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
                 try {
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder()
-                            .url("http://43.226.46.228/notification/tongzhimsg1dian1.txt")
+                            .url("http://43.226.46.228/notification/tongzhimsg1dian2.txt")
                             .build();
                     Response response = client.newCall(request).execute();
                     assert response.body() != null;
