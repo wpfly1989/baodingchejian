@@ -212,7 +212,7 @@ public class CheJianFragment extends Fragment{
 
         //车间企业文化视频
        niceVideoPlayer.setPlayerType(NiceVideoPlayer.TYPE_IJK);
-       niceVideoPlayer.setUp("http://43.226.46.228/video/kanong.mp4",null);
+       niceVideoPlayer.setUp("http://43.226.46.228/video/kanong1.mp4",null);
         TxVideoPlayerController controller = new TxVideoPlayerController(getActivity());
         controller.setTitle("");
         controller.setLenght(409000);
