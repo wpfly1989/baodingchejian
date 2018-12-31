@@ -1,6 +1,7 @@
 package com.example.lenovo.baodingchejian;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -87,6 +88,10 @@ public class WangTuHuanTuListView extends AppCompatActivity {
                         if (commonListViewItemList.get(position).getName().contains("网页")) {
                             Intent intent = new Intent(WangTuHuanTuListView.this,CommonWebViewActivity.class);
                             intent.putExtra("add",add.get(position));
+                            startActivity(intent);
+                        } else if (commonListViewItemList.get(position).getName().contains("CAD")){
+                            Intent intent = new Intent(Intent.ACTION_VIEW);
+                            intent.setData(Uri.parse(add.get(position)));
                             startActivity(intent);
                         } else {
                             Intent intent = new Intent(WangTuHuanTuListView.this, SubsamplingImageActivity.class);

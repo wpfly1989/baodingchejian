@@ -29,7 +29,6 @@
         app:pointsPosition="CENTER"
         app:tipTextColor="#000000"
         app:tipTextSize="13dp">
-
     </com.stx.xhb.xbanner.XBanner>
 
         <android.support.v7.widget.RecyclerView

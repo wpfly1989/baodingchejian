@@ -1,12 +1,15 @@
 package com.example.lenovo.baodingchejian;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -91,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
                 try {
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder()
-                            .url("http://43.226.46.228/notification/tongzhimsg1dian2.txt")
+                            .url("http://43.226.46.228/notification/tongzhimsg1dian2dian2.txt")
                             .build();
                     Response response = client.newCall(request).execute();
                     assert response.body() != null;
@@ -104,15 +107,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
                             dialog.setTitle("通知");
                             dialog.setMessage(tongzhineirong);
                             dialog.setCancelable(false);
-                            dialog.setNegativeButton("现在查看", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Intent intent = new Intent(MainActivity.this,CommonWebViewActivity.class);
-                                    intent.putExtra("add","http://43.226.46.228/notification/xianzaichakan1dian1.html");
-                                    startActivity(intent);
-                                }
-                            });
-                            dialog.setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                            dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
 
@@ -220,13 +215,14 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
                 showFragment(tongZhiFragment);
                 initColor();
                 tongzhiRadioButton.setTextColor(Color.parseColor("#00C957"));
-
+                tongzhiRadioButton.setCompoundDrawablesWithIntrinsicBounds(0,R.mipmap.tongzhitubiaolv,0,0);
             }
         });
 
 
 
         chejianRadioButton.setTextColor(Color.parseColor("#00C957"));
+        chejianRadioButton.setCompoundDrawablesWithIntrinsicBounds(0,R.mipmap.chejiantubiaolv,0, 0);
        showFragment(cheJianFragment);
     }
 
@@ -270,12 +266,17 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     //radiobutton文字颜色初始化
     private void initColor() {
         chejianRadioButton.setTextColor(Color.BLACK);
+        chejianRadioButton.setCompoundDrawablesWithIntrinsicBounds(0,R.mipmap.chejiantubiao,0, 0);
         banzuRadioButton.setTextColor(Color.BLACK);
+        banzuRadioButton.setCompoundDrawablesWithIntrinsicBounds(0,R.mipmap.banzutubiao,0,0);
         tongzhiRadioButton.setTextColor(Color.BLACK);
+        tongzhiRadioButton.setCompoundDrawablesWithIntrinsicBounds(0,R.mipmap.tongzhitubiao,0,0);
         fankuiRadioButton.setTextColor(Color.BLACK);
+        fankuiRadioButton.setCompoundDrawablesWithIntrinsicBounds(0,R.mipmap.shuomingtubiao,0,0);
     }
 
     //radiogroup点击事件
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
 
@@ -283,23 +284,21 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
             case R.id.chejianradiobutton :
                 initColor();
                 chejianRadioButton.setTextColor(Color.parseColor("#00C957"));
+                chejianRadioButton.setCompoundDrawablesWithIntrinsicBounds(0,R.mipmap.chejiantubiaolv,0, 0);
                 showFragment(cheJianFragment);
                 break;
             case R.id.banzuradiobutton :
                 showFragment(banZuFragment);
                 initColor();
                 banzuRadioButton.setTextColor(Color.parseColor("#00C957"));
-
+                banzuRadioButton.setCompoundDrawablesWithIntrinsicBounds(0,R.mipmap.banzutubiaolv,0,0);
                 break;
-           /* case R.id.tongzhiradiobutton:
-               showFragment(tongZhiFragment);
-               initColor();
-               tongzhiRadioButton.setTextColor(Color.parseColor("#00C957"));
-                break;*/
+
             case R.id.fankuiradiobutton:
                 showFragment(fankuiFragment);
                 initColor();
                 fankuiRadioButton.setTextColor(Color.parseColor("#00C957"));
+                fankuiRadioButton.setCompoundDrawablesWithIntrinsicBounds(0,R.mipmap.shuomingtubiaolv,0,0);
                 default:
                     break;
         }
@@ -369,9 +368,5 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         return super.onKeyDown(keyCode, event);
     }
 
-   /* @Override
-    public void onBackPressed() {
-        if (NiceVideoPlayerManager.instance().onBackPressd()) return;
-        super.onBackPressed();
-    }*/
+
 }

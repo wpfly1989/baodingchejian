@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:textSize="15dp"
+        android:lineSpacingMultiplier="1.5"
+        android:text="请选择打开方式：\n（确保至少安装其一，否则会出现错误）"/>
+    <Button
+        android:id="@+id/baidu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:layout_margin="5dp"
+        android:textSize="25dp"
+        android:text="使用百度地图导航"/>
+    <Button
+        android:id="@+id/gaode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:layout_margin="5dp"
+        android:textSize="25dp"
+        android:text="使用高德地图导航"/>
+
+</LinearLayout>

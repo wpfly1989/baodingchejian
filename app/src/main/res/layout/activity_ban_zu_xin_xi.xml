@@ -37,7 +37,7 @@
             android:marqueeRepeatLimit="marquee_forever"
             android:scrollHorizontally="true"
             android:singleLine="true"
-            android:text="注意：下方“定位导航”需配合百度地图放可正常使用，否则会发生闪退现象。请确保手机中安装有百度地图！"/>
+            android:text="注意：“定位导航”功能需配合百度地图或者高德地图才能正常使用！"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

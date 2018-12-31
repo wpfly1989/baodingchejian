@@ -29,7 +29,8 @@
        <RadioGroup
            android:id="@+id/mainActivityRadioGroup"
            android:layout_width="match_parent"
-           android:layout_height="55dp"
+           android:layout_height="60dp"
+           android:background="#FFFFFF"
            android:orientation="horizontal">
            <RadioButton
                android:id="@+id/chejianradiobutton"
@@ -38,7 +39,9 @@
                android:layout_weight="1"
                android:gravity="center"
                android:button="@null"
-               android:textSize="20dp"
+               android:padding="3dp"
+               android:drawableTop="@mipmap/chejiantubiao"
+               android:textSize="13dp"
                android:textColor="#000000"
                android:text="车间"/>
            <RadioButton
@@ -48,7 +51,9 @@
                android:layout_weight="1"
                android:gravity="center"
                android:button="@null"
-               android:textSize="20dp"
+               android:padding="3dp"
+               android:drawableTop="@mipmap/banzutubiao"
+               android:textSize="13dp"
                android:textColor="#000000"
                android:text="班组"/>
            <RadioButton
@@ -58,7 +63,9 @@
                android:layout_weight="1"
                android:gravity="center"
                android:button="@null"
-               android:textSize="20dp"
+               android:padding="3dp"
+               android:drawableTop="@mipmap/tongzhitubiao"
+               android:textSize="13dp"
                android:textColor="#000000"
                android:text="通知"/>
            <RadioButton
@@ -68,7 +75,9 @@
                android:layout_weight="1"
                android:gravity="center"
                android:button="@null"
-               android:textSize="20dp"
+               android:padding="3dp"
+               android:drawableTop="@mipmap/shuomingtubiao"
+               android:textSize="13dp"
                android:textColor="#000000"
                android:text="说明"/>
 
